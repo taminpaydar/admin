@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>How to use JavaScript appendChild()</title>
+</head>
+<body>
+    <ul id="userprofile">
+    </ul>
+    
+    <script>
+        function createMenuItem(name) {
+            let li = document.createElement('li');
+            li.textContent = name;
+            return li;
+        }
+        // get the ul#userprofile
+        const userprofile = document.querySelector('#userprofile');
+        // add the user profile items
+        userprofile.appendChild(createMenuItem('Profile'));
+        userprofile.appendChild(createMenuItem('Settings'));
+        userprofile.appendChild(createMenuItem('Log out'));
+    </script>
+</body>
+</html>

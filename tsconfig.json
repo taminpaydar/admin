@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next2/types/**/*.ts",
+    "src/components/AdavncedEditor/QuillEditor/CustomToolbar.jsx",
+    "src/components/ImageManager/MultiFileManager.js",
+    "src/components/AdavncedEditor/Ckeditor.tsx",
+    ".next/types/**/*.ts"
+, "src/components/AdavncedEditor/TextEditorComponent.js", "src/components/ShowArtilce.js", "src/components/Editor/Flora.js", "src/components/map.js", "src/utils/CanvasMenu.js", "src/pages/Dashboard/Products/DiscountCode/new.tsx"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
