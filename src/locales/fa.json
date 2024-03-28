@@ -24,6 +24,8 @@
         "OTHER IMAGES":"سایر عکس ها",
         "add price":"اضافه کردن قیمت    ",
         "Products List":"لیست محصولات",
+        "Vehicle List":"لیست خودروها",
+
         "Poroduts List":"لیست محصولات",
         "Firstpage":"صفحه اول",
         "About US":"درباره ما",
@@ -146,7 +148,7 @@
         "otherInsurance":"سایر بیمه",
         "gender":"جنسیت",
         "Orders":"سفارشات",
-        "Companies":"برندها",
+        "Companies":"لیست کمپانی ها",
         "Discount Code":"کد تخفیف",
         "Discounts":"تخفیفات "
 

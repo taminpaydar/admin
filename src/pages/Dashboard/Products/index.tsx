@@ -21,14 +21,7 @@ export default function product() {
             <Container>
                 <BreadcrumbCom data={breadcrump}></BreadcrumbCom>
                 <Typography fontSize={'28px'} mt={4} mb={3} fontWeight={'bold'}>  {i18n.t('Products')}</Typography>
-
-                   
-
-
                         <Thumpanilpages name="Products" ></Thumpanilpages>
-
-                   
-    
             </Container>
         </Layout>
 

@@ -63,7 +63,12 @@ export const menuitem = [
                 url: '/Dashboard/Products/Company',
                 name: 'Companies',
                 icon: '/assets/folders.svg'
-
+                
+            },
+            {
+                url: '/Dashboard/Products/vehiclelist',
+                name: 'Vehicle List',
+                icon: '/assets/folders.svg'
                 
             },
             {
@@ -149,14 +154,11 @@ export const menuitem = [
                 url: '/Dashboard/Gallery/Gallery',
                 name: 'Gallery',
                 icon: '/assets/gallery-wide-svgrepo-com.svg'
-
             },
             {
                 url: '/Dashboard/Gallery/Sliders',
                 name: 'Sliders',
                 icon: '/assets/slider-vertical-svgrepo-com.svg'
-
-                
             }
            
         ]

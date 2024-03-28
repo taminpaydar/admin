@@ -197,7 +197,7 @@ export default function NewItem() {
                         {groups != null && keyselectgroup != null &&
                             <Container>
                                 <Stack spacing={2}>
-                                    <Breadcrumbs
+                                    {/* <Breadcrumbs
                                         separator={<NavigatePrevIcon fontSize="small" />}>
                                         {groups.find((car: any) => car.id == keyselectgroup).ToSub != null &&
                                             groups.find((car: any) => car.id == keyselectgroup).ToSub.ToSub != null &&
@@ -211,7 +211,7 @@ export default function NewItem() {
                                             <Typography>{groups.find((car: any) => car.id == keyselectgroup).ToSub.name}</Typography>
                                         }
                                         <Typography>{groups.find((car: any) => car.id == keyselectgroup).name}</Typography>
-                                    </Breadcrumbs>
+                                    </Breadcrumbs> */}
                                 </Stack>
                             </Container>
                         }

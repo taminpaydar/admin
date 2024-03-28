@@ -21,7 +21,6 @@ export default function Thumpanilpages({name}:any) {
 
                                         <Box p={4} textAlign={'center'}>
                                             <img
-
                                                 height="120"
                                                 src={m.icon}
                                             />
