@@ -5,7 +5,7 @@ import cookie from "cookie";
 
 import Layout from "@/layouts/dashboardLayout"
 import Typography from '@mui/material/Typography';
-import i18n from 'i18n';
+import i18n from 'i18n'; 
 import { Button, Grid, Paper } from '@mui/material'
 import { Container, TextField, Box, FormControl, InputLabel, MenuItem, Select, Autocomplete } from "@mui/material";
 import { BreadcrumbCom } from "@/components/BreadCrumpCom";

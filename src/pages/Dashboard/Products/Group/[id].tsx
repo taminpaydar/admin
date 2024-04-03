@@ -331,7 +331,7 @@ export default function GroupPrdocuctEdit({
                 {...params}
 
                 variant="filled"
-                label={i18n.t('Technical')}
+                label={i18n.t('Features')}
                 placeholder=''
               />
             )}

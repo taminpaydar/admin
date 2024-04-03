@@ -60,7 +60,7 @@ export default function ArticleGroup() {
 
     const LoadArticle = (current: any, parent: any) => {
         console.log(parent);
-        axios.get(`${config.url}/v1/dashboard/company?name=${namefilter}`, {
+        axios.get(`${config.url}/v1/dashboard/vehicle?name=${namefilter}`, {
             headers: {
                 Authorization: 'Bearer ' + cookie['token'],
 
@@ -83,7 +83,7 @@ export default function ArticleGroup() {
         try {
             let res: any = await axios({
                 method: 'delete',
-                url: `${config.url}/v1/dashboard/company/${id}`,
+                url: `${config.url}/v1/dashboard/vehicle/${id}`,
 
                 headers: {
                     Authorization: 'Bearer ' + cookie['token'],
@@ -131,7 +131,7 @@ export default function ArticleGroup() {
                     </Button>
                 </Grid>
                 <Grid xs={6} md={2} pr={1} pl={1} >
-                    <Link href={`/Dashboard/Products/Company/new`}>
+                    <Link href={`/Dashboard/Products/vehiclelist/new`}>
                         <Button className={styles.btnupload} style={{ height: 50 }} variant="contained" >
                             {i18n.t('New')}  <img className={styles.m1} height={20} src="/assets/plus.svg"></img>
                         </Button>
@@ -179,7 +179,7 @@ export default function ArticleGroup() {
                                         <TableCell align="right">{row.url}</TableCell>
 
                                         <TableCell align="right">
-                                            <Link href={`/Dashboard/Products/Company/${row.id}`}>
+                                            <Link href={`/Dashboard/Products/vehiclelist/${row.id}`}>
                                                 <img className={styles.m1} src="/assets/insert.svg"></img>
                                             </Link>
                                         </TableCell>
