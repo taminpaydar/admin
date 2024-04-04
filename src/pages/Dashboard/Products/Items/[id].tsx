@@ -264,7 +264,19 @@ export default function ItemEdit({
                                         <MenuItem value='false'>خیر</MenuItem>
 
                                     </Select>
+                                    <Typography color={'gray'} m={1}>{i18n.t('Available')} </Typography>
 
+                                    <Select
+                                        defaultValue={data.Available}
+                                        fullWidth
+                                        onChange={(e) => setData({ ...data, Available: e.target.value })}
+
+                                        variant="outlined">
+                                        <MenuItem value='true' >بلی</MenuItem>
+                                        <MenuItem value='false'>خیر</MenuItem>
+
+                                    </Select>
+                                    
                                     {/* <Typography color={'gray'} m={1}>{i18n.t('Company')} </Typography> */}
 
                                     {/* <Select
