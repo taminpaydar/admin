@@ -17,6 +17,12 @@ import AdvancedEditor from "@/components/AdavncedEditor/TissEditor";
 import FileManagerMultiFile from "@/components/ImageManager/MultiFileManager";
 import ALLFileManagerMultiFile from "@/components/ImageManager/AllFileManager";
 import Swal from 'sweetalert2'
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+
 
 import { useRouter } from "next/router";
 type Repo = any;
@@ -26,6 +32,12 @@ type Repo = any;
 export default function ItemEdit({
     repo, company
 }: any) {
+    const [value, setValue] = React.useState('1');
+
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setValue(newValue);
+    };
+
     const router = useRouter()
     const [companies, setList] = useState<any>(null);
     const [vehiclelist, setVehiclelist] = useState<any>(null);
@@ -149,137 +161,174 @@ export default function ItemEdit({
         <Layout>
             <Container dir='rtl'  >
                 <Paper>
+                    <Box sx={{ width: '100%', typography: 'body1' }}>
 
+                    </Box>
                     <Box p={3}>
                         <BreadcrumbCom data={breadcrump}></BreadcrumbCom>
                         <Typography fontSize={'28px'} mt={4} mb={3} fontWeight={'bold'}>
                             {i18n.t('Edit Product')}
                         </Typography>
-                        <Grid container>
-                            <Grid xs={12} md={6}>
+                        <TabContext value={value}>
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <TabList onChange={handleChange} aria-label="lab API tabs example">
+                                    <Tab label="عمومی" value="1" />
+                                    <Tab label="تصاویر" value="2" />
+                                    <Tab label="توضیحات" value="3" />
+                                    <Tab label="سئو" value="4" />
+                                    <Tab label="مشخصات " value="5" />
+
+                                </TabList>
+                            </Box>
+                            <TabPanel value="1">
                                 <Container>
-                                    <Typography color={'gray'} m={1}>{i18n.t('Name')} </Typography>
-                                    <TextField dir='rtl'
-                                        defaultValue={data.name}
-                                        onChange={(e) => setData({ ...data, name: e.target.value })}
+                                    <Container>
+
+                                        <Typography color={'gray'} m={1}>{i18n.t('Name')} </Typography>
+                                        <TextField dir='rtl'
+                                            defaultValue={data.name}
+                                            onChange={(e) => setData({ ...data, name: e.target.value })}
 
 
-                                        className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                            className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
 
-                                    <Typography color={'gray'} m={1}>{i18n.t('URL')} </Typography>
-                                    <TextField
-                                        defaultValue={data.url}
-                                        onChange={(e) => setData({ ...data, url: e.target.value })}
+                                        <Typography color={'gray'} m={1}>{i18n.t('URL')} </Typography>
+                                        <TextField
+                                            defaultValue={data.url}
+                                            onChange={(e) => setData({ ...data, url: e.target.value })}
 
-                                        dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
-                                    <Typography color={'gray'} m={1}>{i18n.t('technical code')} </Typography>
+                                            dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
 
-                                    <TextField
-                                        defaultValue={data.technicalcode}
-                                        onChange={(e) => setData({ ...data, technicalcode: e.target.value })}
-                                        dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
-
-                                    <Typography color={'gray'} m={1}>{i18n.t('brand')} </Typography>
-                                    {companies != null &&
-                                        <Autocomplete
-                                            multiple
-                                            id="tags-standard"
-                                            options={companies}
-                                            onChange={(event, newValue: any) => {
-                                                setData({ ...data, brand: newValue })
-                                            }}
-                                            defaultValue={data.brand}
-                                            // onChange={((e)=>setData(...data,config:e.target.value))}
-                                            // onChange={(e:any) => setData({ ...data, companies: e.target.value })}
-                                            getOptionLabel={(option: any) => option.name}
-
-                                            renderInput={(params) => (
-                                                <Box dir="rtl" width={'100%'}>
-                                                    <TextField
-
-                                                        {...params}
-                                                        style={{ textAlign: 'right' }}
-                                                        variant="standard"
-                                                        label="انتخاب خودرو"
-                                                        placeholder=""
-                                                    />
-                                                </Box>
-                                            )}
-                                        />
-                                    }
-                                    <Typography color={'gray'} m={1}>{i18n.t('vehicles')} </Typography>
-                                    {vehiclelist != null &&
-                                        <Autocomplete
-                                            multiple
-                                            id="tags-standard"
-                                            options={vehiclelist}
-                                            onChange={(event, newValue) => {
-                                                console.log(newValue);
-                                                setData({ ...data, vehicle: newValue })
-                                            }}
-                                            defaultValue={data.vehicle}
-                                            getOptionLabel={(option: any) => option.name}
-
-                                            renderInput={(params) => (
+                                        <Grid container>
+                                            <Grid xs={12} sm={6} >
+                                                <Typography color={'gray'} m={1}>{i18n.t('قیمت اصلی')} </Typography>
                                                 <TextField
+                                                    defaultValue={data.price}
+                                                    onChange={(e) => setData({ ...data, price: e.target.value })}
 
-                                                    {...params}
-                                                    style={{ textAlign: 'right' }}
-                                                    variant="standard"
+                                                    dir='ltr' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                                <Typography color={'gray'} m={1}>{i18n.t('قیمت بدون تخفیف ')} </Typography>
+                                                <TextField
+                                                    defaultValue={data.precentprice}
+                                                    onChange={(e) => setData({ ...data, precentprice: e.target.value })}
 
-                                                    placeholder=""
-                                                />
-                                            )}
-                                        />
-                                    }
-                                    <Typography color={'gray'} m={1}>{i18n.t('Price')} </Typography>
-                                    <TextField
-                                        defaultValue={data.price}
-                                        onChange={(e) => setData({ ...data, price: e.target.value })}
+                                                    dir='ltr' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
 
-                                        dir='rtl' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
-                                    <Box textAlign={'center'} pt={3} >
-                                        <Button variant={'contained'} href={`/Dashboard/Products/GroupPrice/${data._id}`}>سایر قیمت گذاری ها</Button>
-                                    </Box>
-                                    <Typography color={'gray'} m={1}>{i18n.t('Unit Price')} </Typography>
-                                    <Select
-                                        defaultValue={data.unitprice}
-                                        fullWidth
-                                        onChange={(e) => setData({ ...data, unitprice: e.target.value })}
+                                                <Box textAlign={'center'} pt={3} >
+                                                    <Button variant={'contained'} href={`/Dashboard/Products/GroupPrice/${data._id}`}>سایر قیمت گذاری ها</Button>
+                                                </Box>
+                                                <Typography color={'gray'} m={1}>{i18n.t('technical code')} </Typography>
 
-                                        variant="outlined">
-                                        <MenuItem value='Toman' >تومان</MenuItem>
+                                                <TextField
+                                                    defaultValue={data.technicalcode}
+                                                    onChange={(e) => setData({ ...data, technicalcode: e.target.value })}
+                                                    dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
+                                                <Typography color={'gray'} m={1}>{i18n.t('brand')} </Typography>
+                                                {companies != null &&
+                                                    <Autocomplete
+                                                        multiple
+                                                        id="tags-standard"
+                                                        options={companies}
+                                                        onChange={(event, newValue: any) => {
+                                                            setData({ ...data, brand: newValue })
+                                                        }}
+                                                        defaultValue={data.brand}
+                                                        // onChange={((e)=>setData(...data,config:e.target.value))}
+                                                        // onChange={(e:any) => setData({ ...data, companies: e.target.value })}
+                                                        getOptionLabel={(option: any) => option.name}
+
+                                                        renderInput={(params) => (
+                                                            <Box dir="rtl" width={'100%'}>
+                                                                <TextField
+
+                                                                    {...params}
+                                                                    style={{ textAlign: 'right' }}
+                                                                    variant="standard"
+                                                                    label="انتخاب خودرو"
+                                                                    placeholder=""
+                                                                />
+                                                            </Box>
+                                                        )}
+                                                    />
+                                                }
+
+                                                <Typography color={'gray'} m={1}>{i18n.t('vehicles')} </Typography>
+                                                {vehiclelist != null &&
+                                                    <Autocomplete
+                                                        multiple
+                                                        id="tags-standard"
+                                                        options={vehiclelist}
+                                                        onChange={(event, newValue) => {
+                                                            console.log(newValue);
+                                                            setData({ ...data, vehicle: newValue })
+                                                        }}
+                                                        defaultValue={data.vehicle}
+                                                        getOptionLabel={(option: any) => option.name}
+
+                                                        renderInput={(params) => (
+                                                            <TextField
+
+                                                                {...params}
+                                                                style={{ textAlign: 'right' }}
+                                                                variant="standard"
+
+                                                                placeholder=""
+                                                            />
+                                                        )}
+                                                    />
+                                                }
+                                            </Grid>
+                                            <Grid xs={12} sm={6} p={3} >
+                                                <FileManagerSingle
+                                                    parent={data.id}
+                                                    component="productimage"
+                                                    insermode={false}
+                                                ></FileManagerSingle>
+                                                <Grid container>
+                                                    <Grid xs={2}>
+
+                                                    </Grid>
+
+                                                </Grid>
+                                       
+
+                                        <Typography color={'gray'} m={1}>{i18n.t('Firstpage')} </Typography>
+                                        <Select
+                                            defaultValue={data.firstpage}
+                                            fullWidth
+                                            onChange={(e) => setData({ ...data, firstpage: e.target.value })}
+
+                                            variant="outlined">
+                                            <MenuItem value='true' >بلی</MenuItem>
+                                            <MenuItem value='false'>خیر</MenuItem>
+
+                                        </Select>
+                                        <Typography color={'gray'} m={1}>{i18n.t('Available')} </Typography>
+
+                                        <Select
+                                            defaultValue={data.Available}
+                                            fullWidth
+                                            onChange={(e) => setData({ ...data, Available: e.target.value })}
+
+                                            variant="outlined">
+                                            <MenuItem value='true' >بلی</MenuItem>
+                                            <MenuItem value='false'>خیر</MenuItem>
+
+                                        </Select>
+                                            </Grid>
 
 
-                                    </Select>
+                                        </Grid>
 
-                                    <Typography color={'gray'} m={1}>{i18n.t('Firstpage')} </Typography>
-                                    <Select
-                                        defaultValue={data.firstpage}
-                                        fullWidth
-                                        onChange={(e) => setData({ ...data, firstpage: e.target.value })}
 
-                                        variant="outlined">
-                                        <MenuItem value='true' >بلی</MenuItem>
-                                        <MenuItem value='false'>خیر</MenuItem>
 
-                                    </Select>
-                                    <Typography color={'gray'} m={1}>{i18n.t('Available')} </Typography>
 
-                                    <Select
-                                        defaultValue={data.Available}
-                                        fullWidth
-                                        onChange={(e) => setData({ ...data, Available: e.target.value })}
 
-                                        variant="outlined">
-                                        <MenuItem value='true' >بلی</MenuItem>
-                                        <MenuItem value='false'>خیر</MenuItem>
+                                       
 
-                                    </Select>
-                                    
-                                    {/* <Typography color={'gray'} m={1}>{i18n.t('Company')} </Typography> */}
+                                        {/* <Typography color={'gray'} m={1}>{i18n.t('Company')} </Typography> */}
 
-                                    {/* <Select
+                                        {/* <Select
                                         defaultValue={data.company}
                                         fullWidth
                                         onChange={(e) => setData({ ...data, company: e.target.value })}
@@ -296,14 +345,26 @@ export default function ItemEdit({
 
 
                                     </Select> */}
-                                    {/* <Typography color={'gray'} m={1}>{i18n.t('Invertory')} </Typography>
+                                        {/* <Typography color={'gray'} m={1}>{i18n.t('Invertory')} </Typography>
                                     <TextField
                                         defaultValue={data.invertory}
                                         onChange={(e) => setData({ ...data, invertory: e.target.value })}
 
                                         dir='rtl' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" /> */}
 
+                                    </Container>
                                 </Container>
+
+                            </TabPanel>
+                            <TabPanel value="2">Item Two</TabPanel>
+                            <TabPanel value="3">Item Three</TabPanel>
+                            <TabPanel value="4">Item 4</TabPanel>
+                            <TabPanel value="5">Item 5</TabPanel>
+
+                        </TabContext>
+                        <Grid container>
+                            <Grid xs={12} md={6}>
+
 
 
                             </Grid>

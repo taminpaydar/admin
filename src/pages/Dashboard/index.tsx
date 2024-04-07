@@ -31,17 +31,17 @@ export default function dashboardPage() {
         }).then(function (res) {
             setUserinfo(res.data.message);
         })
-  
+
     }, []);
     return (
         <Layout>
             <Container>
 
                 <Container>
-                    <Grid container     dir="rtl">
+                    <Grid container dir="rtl">
                         <Grid xs={12}>
                             <BreadcrumbCom
-                        
+
                                 data={[
                                     {
                                         name: 'User Portal',
@@ -70,33 +70,31 @@ export default function dashboardPage() {
 
                         </Grid>
                         <Grid md={8} xs={12} pr={2} >
-                           
-                           
-                      
+
+
+
                             <Grid xs={12}>
                                 <Grid container mt={2}>
-                                    <Grid  md={6}>
+                                    <Grid md={6}>
                                         <Typography
-                                          
+
                                         >Dashboard</Typography>
                                     </Grid>
-                               
+
                                 </Grid>
                             </Grid>
                             <Grid xs={12}>
                                 <Grid container>
                                     {menuitem.map((item: any) => {
-
-
-                                         return(
-                                            item.show==true ?    <Grid xs={12} md={6} p={1}>
+                                        return (
+                                            item.show == true ? <Grid xs={12} md={6} p={1}>
 
                                                 <RememberThumpnail data={item}></RememberThumpnail>
-        
+
                                             </Grid> : <></>
-                                            )
+                                        )
                                     })}
-                                   
+
                                 </Grid>
 
                             </Grid>
