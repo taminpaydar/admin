@@ -81,6 +81,11 @@ export const menuitem = [
                 name: 'Discounts',
                 icon: '/assets/discount.svg'
             },
+            {
+                url: '/Dashboard/Products/Pricing',
+                name: 'Pricing',
+                icon: '/assets/discount.svg'
+            },
         ]
     },
     {
