@@ -7,7 +7,7 @@ import Layout from "@/layouts/dashboardLayout"
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import i18n from 'i18n';
-import { Button, Grid } from '@mui/material'
+import { Button, FormControl, Grid, InputLabel, Select } from '@mui/material'
 import { Container, TextField, Box } from "@mui/material";
 import { BreadcrumbCom } from "@/components/BreadCrumpCom";
 import AdvancedEditor from "@/components/AdavncedEditor/TissEditor";
@@ -19,9 +19,7 @@ import ErrorDB from "@/components/ErrorDb";
 
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 type Repo = any;
-export default function EditGroup({
-  repo,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function EditGroup({ group, repo }: any) {
   let cookie = getCookies();
   const router = useRouter()
   const [key, setKey] = useState<any>(0);
@@ -95,7 +93,40 @@ export default function EditGroup({
                 fullWidth id="outlined-basic"
                 variant="outlined"
               />
+              <Typography m={1}>{i18n.t('Group')} </Typography>
 
+              {
+                group != null &&
+                <Grid xs={12} md={12} >
+                  <FormControl fullWidth dir='rtl'>
+                    <InputLabel id="demo-simple-select-label">{i18n.t('Group')} </InputLabel>
+                    <Select
+                      native
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Group"
+                      defaultValue={data.parent}
+                      onChange={(e) => setData({ ...data, parent: e.target.value })}
+
+                    >
+                      {group.message.map((item: any) => {
+                        return item.tosub.length == 0 ? <option value={item.id}>{item.name}</option> : <>
+                          <option value={item.id}><strong>{item.name}</strong></option>
+                          {item.tosub.map((k: any) => {
+                            return k.tosub.length == 0 ? <option value={k.id}> 	&#8627;  {k.name}</option> : <>
+                              <option value={k.id}> &#8627; {k.name}</option>
+                              {k.tosub.map((e: any) => {
+                                return <option value={e.id}>&#160; 	&#8627; {e.name}</option>
+                              })}
+                            </>
+                          })}
+                        </>
+                      })}
+
+                    </Select>
+                  </FormControl>
+                </Grid>
+              }
 
               <Grid md={12} mt={5} textAlign={'center'}>
                 <Button onClick={(e) => save()} variant="contained" >{i18n.t('Save')}</Button>
@@ -155,6 +186,15 @@ export const getServerSideProps: GetServerSideProps<{
   repo: Repo
 }> = async (context: any) => {
   const cookies = cookie.parse(context.req.headers.cookie);
+
+  const res2 = await fetch(`${config.url}/v1/dashboard/bloggroup/all`, {
+    headers: {
+      'Authorization': 'Bearer ' + cookies['token']
+
+    }
+  })
+  const group = await res2.json()
+
   const res = await fetch(config.url + '/v1/dashboard/blog/' + context.params.id, {
     method: 'GET',
     headers: {
@@ -168,5 +208,5 @@ export const getServerSideProps: GetServerSideProps<{
     };
   }
   const repo = await res.json()
-  return { props: { repo } }
+  return { props: { repo: repo, group: group } }
 }

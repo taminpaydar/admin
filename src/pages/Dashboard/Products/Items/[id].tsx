@@ -169,6 +169,11 @@ export default function ItemEdit({
                         <Typography fontSize={'28px'} mt={4} mb={3} fontWeight={'bold'}>
                             {i18n.t('Edit Product')}
                         </Typography>
+                        <Container className="mb-12" >
+                            <Button onClick={(e) => { saveitem() }} className={styles.buttonblack} variant="contained" >
+                                <img className={styles.m1} src="/assets/successicon.svg"></img>      {i18n.t('Save')}
+                            </Button>
+                        </Container>
                         <TabContext value={value}>
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -290,110 +295,75 @@ export default function ItemEdit({
                                                     </Grid>
 
                                                 </Grid>
-                                       
 
-                                        <Typography color={'gray'} m={1}>{i18n.t('Firstpage')} </Typography>
-                                        <Select
-                                            defaultValue={data.firstpage}
-                                            fullWidth
-                                            onChange={(e) => setData({ ...data, firstpage: e.target.value })}
 
-                                            variant="outlined">
-                                            <MenuItem value='true' >بلی</MenuItem>
-                                            <MenuItem value='false'>خیر</MenuItem>
+                                                <Typography color={'gray'} m={1}>{i18n.t('Firstpage')} </Typography>
+                                                <Select
+                                                    defaultValue={data.firstpage}
+                                                    fullWidth
+                                                    onChange={(e) => setData({ ...data, firstpage: e.target.value })}
 
-                                        </Select>
-                                        <Typography color={'gray'} m={1}>{i18n.t('Available')} </Typography>
+                                                    variant="outlined">
+                                                    <MenuItem value='true' >بلی</MenuItem>
+                                                    <MenuItem value='false'>خیر</MenuItem>
 
-                                        <Select
-                                            defaultValue={data.Available}
-                                            fullWidth
-                                            onChange={(e) => setData({ ...data, Available: e.target.value })}
+                                                </Select>
+                                                <Typography color={'gray'} m={1}>{i18n.t('Available')} </Typography>
 
-                                            variant="outlined">
-                                            <MenuItem value='true' >بلی</MenuItem>
-                                            <MenuItem value='false'>خیر</MenuItem>
+                                                <Select
+                                                    defaultValue={data.Available}
+                                                    fullWidth
+                                                    onChange={(e) => setData({ ...data, Available: e.target.value })}
 
-                                        </Select>
+                                                    variant="outlined">
+                                                    <MenuItem value='true' >بلی</MenuItem>
+                                                    <MenuItem value='false'>خیر</MenuItem>
+
+                                                </Select>
                                             </Grid>
 
 
                                         </Grid>
 
 
-
-
-
-                                       
-
-                                        {/* <Typography color={'gray'} m={1}>{i18n.t('Company')} </Typography> */}
-
-                                        {/* <Select
-                                        defaultValue={data.company}
-                                        fullWidth
-                                        onChange={(e) => setData({ ...data, company: e.target.value })}
-
-                                    >
-                                        <MenuItem value={''}>None</MenuItem>
-                                        {
-                                            company.message.map((map: any) => {
-                                                return (
-                                                    <MenuItem value={map._id}>{map.name}</MenuItem>
-                                                )
-                                            })
-                                        }
-
-
-                                    </Select> */}
-                                        {/* <Typography color={'gray'} m={1}>{i18n.t('Invertory')} </Typography>
-                                    <TextField
-                                        defaultValue={data.invertory}
-                                        onChange={(e) => setData({ ...data, invertory: e.target.value })}
-
-                                        dir='rtl' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" /> */}
-
                                     </Container>
                                 </Container>
 
                             </TabPanel>
-                            <TabPanel value="2">Item Two</TabPanel>
-                            <TabPanel value="3">Item Three</TabPanel>
-                            <TabPanel value="4">Item 4</TabPanel>
-                            <TabPanel value="5">Item 5</TabPanel>
-
-                        </TabContext>
-                        <Grid container>
-                            <Grid xs={12} md={6}>
-
-
-
-                            </Grid>
-                            <Grid xs={12} md={6}>
-                                <FileManagerSingle
-                                    parent={data.id}
-                                    component="productimage"
-                                    insermode={false}
-                                ></FileManagerSingle>
-
-                            </Grid>
-                            <Grid xs={12} md={12}>
-                                <Box p={3} mt={3} bgcolor={'#eee'}>
+                            <TabPanel value="2">
+                                <Box p={3} mt={3} >
                                     <Box mt={3}>
-                                        <Typography color={'gray'} >OTHER IMAGES</Typography>
-
+                                        <Typography  >سایر تصاویر</Typography>
                                         <FileManagerMultiFile
                                             parent={data.id}
                                             component="products"
                                             insermode={false}
                                             edittable={true}
                                         ></FileManagerMultiFile>
-                                    </Box>
-                                </Box>``
+                                      
 
+                                        <Box mt={10} pt={2}>
+                                        <hr ></hr>
+                                            <Typography > کاتالوگ و فایل</Typography>
+                                         
+                                            <ALLFileManagerMultiFile
+                                                parent={data.id}
+                                                component="katalogproducts"
+                                                insermode={false}
+                                                edittable={true}
+                                            ></ALLFileManagerMultiFile>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </TabPanel>
+                            <TabPanel value="3">
                                 <Box mt={3}>
                                     <AdvancedEditor parent={repo.message.id}></AdvancedEditor>
 
                                 </Box>
+                            </TabPanel>
+                            <TabPanel value="4">
+
                                 <Typography m={1}>{i18n.t('keywords')} </Typography>
                                 <TextField dir='rtl'
 
@@ -415,142 +385,129 @@ export default function ItemEdit({
                                     onChange={(e) => setData({ ...data, description: e.target.value })}
                                     dir='rtl' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
 
-                            </Grid>
 
-                        </Grid>
+                            </TabPanel>
+                            <TabPanel value="5">
 
-                        <Box p={3} mt={3} bgcolor={'#eee'}>
-                            <Box mt={3}>
-                                <Typography > کاتالوگ و فایل</Typography>
-                                <ALLFileManagerMultiFile
-                                    parent={data.id}
-                                    component="katalogproducts"
-                                    insermode={false}
-                                    edittable={true}
-                                ></ALLFileManagerMultiFile>
-                            </Box>
-                        </Box>
-                        <Grid pt={3}>
-                            <Box bgcolor={'#333'} color={'#fff'} p={1} textAlign={'center'}>
-                                <Typography  >{i18n.t('specifications')} </Typography>
+                                <Grid pt={3}>
+                                    <Box bgcolor={'#333'} color={'#fff'} p={1} textAlign={'center'}>
+                                        <Typography  >{i18n.t('specifications')} </Typography>
 
-                            </Box>
-                            <Grid container>
-                                {
-                                    repo.mygr.map((m: any) => {
-                                        return (
-                                            <>{m.specifications != undefined && m.specifications.map((map: any) => {
+                                    </Box>
+                                    <Grid container>
+                                        {
+                                            repo.mygr.map((m: any) => {
                                                 return (
-                                                    <Grid xs={12} md={12} p={2} container>
-                                                        <Grid xs={12}>
-                                                            <Typography textAlign={'right'} m={1}>{map}</Typography>
+                                                    <>{m.specifications != undefined && m.specifications.map((map: any) => {
+                                                        return (
+                                                            <Grid xs={12} md={12} p={2} container>
+                                                                <Grid xs={12}>
+                                                                    <Typography textAlign={'right'} m={1}>{map}</Typography>
 
-                                                        </Grid>
-                                                        <Grid xs={12}>
-                                                            <TextField
-                                                                multiline
-                                                                onChange={(e) => setspecifications({ ...specifications, [map]: e.target.value })}
-                                                                defaultValue={specifications != null ? specifications[map] != false && specifications[map] != undefined ? specifications[map] : '' : ''}
-                                                                fullWidth
-                                                                dir='rtl' className={styles.myformtextfield}
-                                                                id="outlined-basic" variant="outlined" />
+                                                                </Grid>
+                                                                <Grid xs={12}>
+                                                                    <TextField
+                                                                        multiline
+                                                                        onChange={(e) => setspecifications({ ...specifications, [map]: e.target.value })}
+                                                                        defaultValue={specifications != null ? specifications[map] != false && specifications[map] != undefined ? specifications[map] : '' : ''}
+                                                                        fullWidth
+                                                                        dir='rtl' className={styles.myformtextfield}
+                                                                        id="outlined-basic" variant="outlined" />
 
-                                                        </Grid>
-                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
 
+                                                        )
+
+                                                    })}
+                                                    </>
                                                 )
+                                            })
+                                        }
 
-                                            })}
-                                            </>
-                                        )
-                                    })
-                                }
+                                    </Grid>
+                                </Grid>
+                                <Grid pt={3}>
+                                    <Box bgcolor={'#333'} color={'#fff'} p={1} textAlign={'center'}>
+                                        <Typography  >{i18n.t('Technical')} </Typography>
 
-                            </Grid>
-                        </Grid>
+                                    </Box>
 
+                                    <Grid container>
 
-                        <Grid pt={3}>
-                            <Box bgcolor={'#333'} color={'#fff'} p={1} textAlign={'center'}>
-                                <Typography  >{i18n.t('Technical')} </Typography>
-
-                            </Box>
-
-                            <Grid container>
-
-                                {
-                                    repo.mygr.map((m: any) => {
-                                        return (
-                                            <>{m.Technical != undefined && m.Technical.map((map: any) => {
+                                        {
+                                            repo.mygr.map((m: any) => {
                                                 return (
-                                                    <Grid xs={12} md={12} p={2} container>
-                                                        <Grid xs={12}>
-                                                            <Typography textAlign={'right'} m={1}>{map}</Typography>
+                                                    <>{m.Technical != undefined && m.Technical.map((map: any) => {
+                                                        return (
+                                                            <Grid xs={12} md={12} p={2} container>
+                                                                <Grid xs={12}>
+                                                                    <Typography textAlign={'right'} m={1}>{map}</Typography>
 
-                                                        </Grid>
-                                                        <Grid xs={12}>
-                                                            <TextField
-                                                                multiline
-                                                                onChange={(e) => setTechnical({ ...Technical, [map]: e.target.value })}
-                                                                defaultValue={Technical != null ? Technical[map] != undefined ? Technical[map] : '' : ''}
-                                                                fullWidth
-                                                                dir='rtl' className={styles.myformtextfield}
-                                                                id="outlined-basic" variant="outlined" />
+                                                                </Grid>
+                                                                <Grid xs={12}>
+                                                                    <TextField
+                                                                        multiline
+                                                                        onChange={(e) => setTechnical({ ...Technical, [map]: e.target.value })}
+                                                                        defaultValue={Technical != null ? Technical[map] != undefined ? Technical[map] : '' : ''}
+                                                                        fullWidth
+                                                                        dir='rtl' className={styles.myformtextfield}
+                                                                        id="outlined-basic" variant="outlined" />
 
-                                                        </Grid>
-                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
 
+                                                        )
+
+                                                    })}
+                                                    </>
                                                 )
-
-                                            })}
-                                            </>
-                                        )
-                                    })
-                                }
+                                            })
+                                        }
 
 
 
 
-                            </Grid>
-                            <Grid xs={12} md={4}>
+                                    </Grid>
+                                    <Grid xs={12} md={4}>
 
-                            </Grid>
-                        </Grid>
-                        <Grid pt={3}>
-                            <Box bgcolor={'#333'} color={'#fff'} p={1} textAlign={'center'}>
-                                <Typography  >{i18n.t('Features')} </Typography>
+                                    </Grid>
+                                </Grid>
+                                <Grid pt={3}>
+                                    <Box bgcolor={'#333'} color={'#fff'} p={1} textAlign={'center'}>
+                                        <Typography  >{i18n.t('Features')} </Typography>
 
-                            </Box>
-                            <Grid container>
-                                {
-                                    repo.mygr.map((m: any) => {
-                                        return (
-                                            <>{m.Features != undefined && m.Features.map((map: any) => {
+                                    </Box>
+                                    <Grid container>
+                                        {
+                                            repo.mygr.map((m: any) => {
                                                 return (
-                                                    <Grid xs={12} md={12} p={2} container>
-                                                        <Grid xs={12}>
-                                                            <Typography textAlign={'right'} m={1}>{map}</Typography>
+                                                    <>{m.Features != undefined && m.Features.map((map: any) => {
+                                                        return (
+                                                            <Grid xs={12} md={12} p={2} container>
+                                                                <Grid xs={12}>
+                                                                    <Typography textAlign={'right'} m={1}>{map}</Typography>
 
-                                                        </Grid>
-                                                        <Grid xs={12}>
-                                                            <Switch
-                                                                defaultChecked={Features != null && Features[map] != undefined && Features[map]}
-                                                                onChange={(e) => setFeatures({ ...Features, [map]: e.target.value == 'on' ? true : false })}
-                                                            />
+                                                                </Grid>
+                                                                <Grid xs={12}>
+                                                                    <Switch
+                                                                        defaultChecked={Features != null && Features[map] != undefined && Features[map]}
+                                                                        onChange={(e) => setFeatures({ ...Features, [map]: e.target.value == 'on' ? true : false })}
+                                                                    />
 
 
-                                                        </Grid>
-                                                    </Grid>
+                                                                </Grid>
+                                                            </Grid>
 
+                                                        )
+
+                                                    })}
+                                                    </>
                                                 )
+                                            })
+                                        }
 
-                                            })}
-                                            </>
-                                        )
-                                    })
-                                }
-
-                                {/* {
+                                        {/* {
                                     data.togroup.Features != null &&
                                     data.togroup.Features.map((map: any) => {
                                         let x = map.name;
@@ -586,23 +543,24 @@ export default function ItemEdit({
                                     })} */}
 
 
-                            </Grid>
-                        </Grid>
-                        <Grid xs={12} md={12} p={1}>
-                            <Container >
-                                <Button onClick={(e) => { saveitem() }} className={styles.buttonblack} variant="contained" >
-                                    <img className={styles.m1} src="/assets/successicon.svg"></img>      {i18n.t('Save')}
-                                </Button>
-                            </Container>
+                                    </Grid>
+                                </Grid>
 
-                        </Grid>
+                            </TabPanel>
+
+                        </TabContext>
+
+
+
+
+
+
 
 
                     </Box>
                 </Paper>
                 {error != null && <ErrorDB key={key} err={error} />}
             </Container >
-            <pre>{JSON.stringify(repo.mygr, null, 2)}</pre>
         </Layout >
     )
 }

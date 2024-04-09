@@ -80,13 +80,13 @@ export default function RegsiterPage() {
 
                             <Grid xs={12} md={12} sx={GridSpacing} >
                                 <Typography m={1}>{i18n.t('E-mail')} </Typography>
-                                <TextField dir='rtl'   {...register("email")} className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                <TextField dir='ltr'   {...register("email")} className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
                             </Grid>
                             <Grid xs={12} md={12} sx={GridSpacing} >
                                 <Typography m={1}>{i18n.t('password')}</Typography>
                                 <TextField
                                     {...register("password")}
-                                    dir="rtl"
+                                    dir="ltr"
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start" >

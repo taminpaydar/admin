@@ -71,7 +71,7 @@ export default function ArticleGroup() {
             setParentnode(res.data.parent)
         })
     }
-    const exportexcel = () => {
+    const exportexcel =()=>{
         axios({
             method: 'GET',
             url: `${config.url}/v1/dashboard/exportexcel`,
@@ -91,7 +91,7 @@ export default function ArticleGroup() {
             //   filePath.close();
             //   console.log('File downloaded successfully.');
             // });
-
+           
         })
     }
     const deleteItem = (id: String) => {
@@ -159,88 +159,13 @@ export default function ArticleGroup() {
             </Grid>
 
             <Box mt={4}>
-                <Box mb={3}>
-                    <Button variant={'contained'} color={'inherit'} onClick={(e) => {
-                        exportexcel()
-                    }}>
-                        <img src="/assets/excel.svg" width={20}></img> خروجی Excel
-                    </Button>
-                    {/* <Button variant={'contained'} color={'inherit'}   href="/Dashboard/Products/Pricing/upload">
-                <img src="/assets/excel.svg" width={20}></img> ورود Excel
-                </Button> */}
-                </Box>
+            <Box mb={3}>
+                <Button href="/Dashboard/Products/Pricing"   variant={'contained'} >
+                    <img src="/assets/excel.svg" width={20}></img> بازگشت به لیست
+                </Button>
+            </Box>
 
-                {
-                    article != null &&
-
-                    <TableContainer component={Paper} dir={'rtl'}>
-                        <Table sx={{ minWidth: 650 }} aria-label="a dense table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align="right">{i18n.t('name')}</TableCell>
-                                    <TableCell align="right">{i18n.t('group')}</TableCell>
-
-                                    <TableCell align="right">{i18n.t('main price')}</TableCell>
-                                    <TableCell align="right">{i18n.t('delete')}</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {article.docs.map((row: any) => (
-                                    <TableRow
-
-                                        key={row.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell align="right" component="th" scope="row">
-                                            {row.name}
-                                        </TableCell>
-                                        <TableCell align="right">{row.togroup.name}</TableCell>
-
-                                        <TableCell align="right">
-                                            <TextField disabled defaultValue={row.price}></TextField>
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            {
-                                                row.topricegroup.map((item: any) => {
-                                                    return (
-                                                        <Box mt={1}>
-                                                            <Typography fontWeight={'bold'} fontSize={14}>{item.title}</Typography>
-                                                            {
-                                                                item.toprices.map((p: any) => {
-                                                                    return (
-                                                                        <Box mt={1} sx={{ display: 'flex' }}>
-                                                                            <Box mr={1} ml={2}>
-                                                                                <Typography>{p.title}</Typography>
-                                                                            </Box>
-                                                                            <TextField disabled size="small" defaultValue={p.price}></TextField>
-
-                                                                        </Box>
-                                                                    )
-                                                                })
-                                                            }
-
-
-                                                        </Box>
-                                                    )
-                                                })
-                                            }
-
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-
-                }
-                {
-                    article != null &&
-                    <Stack spacing={2} dir='rtl' mt={5} alignContent={'center'}>
-                        <Pagination
-                            onChange={ChangePage}
-                            count={article.totalPages} defaultPage={page} siblingCount={0} boundaryCount={2} />
-                    </Stack>
-                }
+              
             </Box>
         </Container>
 

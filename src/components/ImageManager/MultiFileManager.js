@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import { getCookies } from "cookies-next";
-import { Box, Button, Card, Grid, CardMedia, CardActionArea, CardContent, Typography, Container, TextField } from '@mui/material';
+import { Box, Button, Card, Grid, CardMedia, CardActionArea, CardContent, Typography, Container, TextField, Stack } from '@mui/material';
 import { config } from "@/config";
 import styles from '../../app/template.module.scss'
 import i18n from '../../../i18n';
@@ -197,16 +197,22 @@ export default function FileManagerMultiFile({ parent, component, insermode, edi
   }
   return (
     <div className="container">
-      <div {...getRootProps({ className: 'dropzone' })}>
-        <input {...getInputProps()} />
-        <p>{i18n.t('File Upload')}</p>
-      </div>
-      <Button
-        onClick={(e) => loaditem()}
-      >
-
-        <Refresh></Refresh>
-      </Button>
+      <Stack spacing={4} direction="row">
+        <Box
+          mr={2}
+          {...getRootProps({ className: 'dropzone' })} style={{ height: '40px', cursor: 'pointer', backgroundColor: 'green', width: '80px', borderRadius: '15px', padding: '5px', textAlign: 'center' }}>
+          <input {...getInputProps()} />
+          <p style={{ color: 'white' }}>{i18n.t('File Upload')}</p>
+        </Box>
+        <Box></Box>
+        <Box
+          mr={2}
+          style={{ height: '40px', cursor: 'pointer', backgroundColor: 'gray', width: '80px', borderRadius: '15px', padding: '5px', textAlign: 'center' }}
+          onClick={(e) => loaditem()}
+        >
+          <Refresh htmlColor='white'></Refresh>
+        </Box>
+      </Stack>
 
 
       <Grid container >

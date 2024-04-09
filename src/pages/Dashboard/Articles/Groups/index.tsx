@@ -142,9 +142,7 @@ export default function ArticleGroup() {
                             <Add></Add> New Group
                         </Button>
 
-
                     </Link>
-
 
                     {beforeprant != '' &&
                         <Button onClick={(e) => { backtomain(beforeprant.subgroup, beforeprant) }}>
