@@ -35,7 +35,7 @@ export const menuitem = [
         ]
     },
     {
-        url: '/Dashboard/Setting',
+        url: '/Dashboard/Products',
         icon: '/assets/arrowdown.svg',
         name: 'Products',
         show:true,
