@@ -93,7 +93,7 @@ export default function newArticleGroup() {
 
     ]
     return <Layout>
-        <Container>
+        <Container sx={{ background:'#fff',padding:'30px',borderRadius:'20px'}}>
             <BreadcrumbCom data={breadcrump}></BreadcrumbCom>
             <Typography fontSize={'28px'} mt={4} mb={3} fontWeight={'bold'}>{i18n.t('New Group')}</Typography>
             <form onSubmit={handleSubmit(onSubmit)} >

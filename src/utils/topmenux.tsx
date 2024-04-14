@@ -21,14 +21,11 @@ export default function AccountMenu() {
 
                 {menuitem.map((item: any) => {
                     return (
-                        <Box dir="lrt" ml={0} mr={1} mt={2}>
+                        <Box dir="lrt" ml={0} mr={3} >
                             <Link underline='none' href={item.url}>
                                 <Stack direction="row" spacing={1} >
-                                    <Box m={1}>
-                                        <img src={item.icon} width={'22px'} ></img>
-
-                                    </Box>
-                                    <Box pt={1.4}>
+                               
+                                    <Box  >
                                         <Typography fontSize={'14px'} color={'black'}>{i18n.t(item.name)}</Typography>
 
                                     </Box>

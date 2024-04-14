@@ -1,4 +1,4 @@
-import Layout from "@/layouts/dashboardLayout"
+import Layout from "@/layouts/dashboardLayout2"
 import { Container, Grid, Typography } from "@mui/material"
 import { BreadcrumbCom } from "@/components/BreadCrumpCom"
 import { PrfileFirstPage } from "@/utils/ProfileFirstPage"
@@ -37,75 +37,38 @@ export default function dashboardPage() {
         <Layout>
             <Container>
 
-                <Container>
-                    <Grid container dir="rtl">
-                        <Grid xs={12}>
-                            <BreadcrumbCom
-
-                                data={[
-                                    {
-                                        name: 'User Portal',
-                                        url: '/Dashboard'
-                                    },
-                                    {
-                                        name: 'home',
-                                        url: null
-
-                                    },
-
-                                ]}
-                            ></BreadcrumbCom>
-                            {userinfo != null &&
-                                <Typography textAlign={'left'} fontSize={'28px'} mt={4} mb={3} fontWeight={'bold'}>👋  Welcome to Dashboard </Typography>
-
-                            }
-                        </Grid>
-                        <Grid md={4} xs={12} pr={6} >
-                            <Box sx={BoxDashboard}>
-                                {userinfo != null &&
-                                    <PrfileFirstPage data={userinfo}></PrfileFirstPage>
-                                }
-                            </Box>
-
-
-                        </Grid>
-                        <Grid md={8} xs={12} pr={2} >
-
-
-
-                            <Grid xs={12}>
-                                <Grid container mt={2}>
-                                    <Grid md={6}>
-                                        <Typography
-
-                                        >Dashboard</Typography>
-                                    </Grid>
-
-                                </Grid>
-                            </Grid>
-                            <Grid xs={12}>
-                                <Grid container>
-                                    {menuitem.map((item: any) => {
-                                        return (
-                                            item.show == true ? <Grid xs={12} md={6} p={1}>
-
-                                                <RememberThumpnail data={item}></RememberThumpnail>
-
-                                            </Grid> : <></>
-                                        )
-                                    })}
-
-                                </Grid>
-
-                            </Grid>
-                        </Grid>
-
-
-
-
+                <Grid container dir="rtl">
+                    <Grid xs={12}>
 
                     </Grid>
-                </Container>
+                    <Grid md={3} xs={12} pr={6} >
+                        <Box sx={BoxDashboard}>
+                            {userinfo != null &&
+                                <PrfileFirstPage data={userinfo}></PrfileFirstPage>
+                            }
+                        </Box>
+                    </Grid>
+                    <Grid md={9} xs={12} pr={2} >
+                        <Grid xs={12}>
+                            <Grid container>
+                                {menuitem.map((item: any) => {
+                                    return (
+                                        item.show == true ? <Grid xs={12} md={12} p={1}>
+                                            <RememberThumpnail data={item}></RememberThumpnail>
+                                        </Grid> : <></>
+                                    )
+                                })}
+
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+
+
+
+
+
+                </Grid>
 
             </Container>
         </Layout>

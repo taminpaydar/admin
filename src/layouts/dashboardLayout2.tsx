@@ -85,7 +85,7 @@ export default function dashboardLayout({ children }: {
 
         </Box>
         <Box mt={12} mb={13} dir="rtl">
-            <Container sx={{ background: '#fff', padding: '30px', borderRadius: '20px' }} >
+            <Container >
                 {children}
 
             </Container>

@@ -22,7 +22,7 @@ export default function Aritlcemanager() {
     return (
 
         <Layout>
-            <Container>
+            <Container sx={{ background:'#fff',padding:'30px',borderRadius:'20px'}}>
                 <BreadcrumbCom data={breadcrump}></BreadcrumbCom>
                 <Typography fontSize={'28px'} mt={4} mb={3} fontWeight={'bold'}>  {i18n.t('Setting')}</Typography>
                 <Thumpanilpages name="Settings" ></Thumpanilpages>
