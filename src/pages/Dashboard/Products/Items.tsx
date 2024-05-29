@@ -27,7 +27,7 @@ import Paper from '@mui/material/Paper';
 
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
+import Swal from "sweetalert2";
 export default function ArticleGroup() {
     const [error, setError] = useState<any>(null);
     const [parent, setParent] = useState<any>('');
@@ -71,14 +71,29 @@ export default function ArticleGroup() {
         })
     }
     const deleteItem = (id: String) => {
-        axios.delete(`${config.url}/v1/dashboard/product/${id}`, {
-            headers: {
-                Authorization: 'Bearer ' + cookie['token'],
+        Swal.fire({
+            title: "از کا خود مطمئن هستید؟",
+            text: "در صورت پاک کردن داده ها غیر قابل بازگشت است",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText:'خیر',
+            confirmButtonText: "بله"
+        }).then((result) => {
+            if (result.isConfirmed) {
 
+                axios.delete(`${config.url}/v1/dashboard/product/${id}`, {
+                    headers: {
+                        Authorization: 'Bearer ' + cookie['token'],
+
+                    }
+                }).then(function (res) {
+                    LoadArticle(1, parent);
+                })
             }
-        }).then(function (res) {
-            LoadArticle(page, parent);
-        })
+        });
+
 
     }
     const ChangePage = async (event: React.ChangeEvent<unknown>, value: number) => {

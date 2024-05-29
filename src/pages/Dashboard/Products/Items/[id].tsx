@@ -218,6 +218,18 @@ export default function ItemEdit({
                                                     onChange={(e) => setData({ ...data, precentprice: e.target.value })}
 
                                                     dir='ltr' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                                              <Typography color={'gray'} m={1}>{i18n.t('قیمت نمایندگی')} </Typography>
+                                                        <TextField
+                                                    defaultValue={data.price2}
+                                                    onChange={(e) => setData({ ...data, price2: e.target.value })}
+
+                                                    dir='ltr' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                                <Typography color={'gray'} m={1}>{i18n.t('قیمت فروشنده')} </Typography>
+                                                <TextField
+                                                    defaultValue={data.price3}
+                                                    onChange={(e) => setData({ ...data, price3: e.target.value })}
+
+                                                    dir='ltr' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
 
                                                 <Box textAlign={'center'} pt={3} >
                                                     <Button variant={'contained'} href={`/Dashboard/Products/GroupPrice/${data._id}`}>سایر قیمت گذاری ها</Button>

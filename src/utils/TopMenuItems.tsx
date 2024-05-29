@@ -180,7 +180,12 @@ export const menuitem = [
                 icon: '/assets/menu2-svgrepo-com.svg'
 
             },
-           
+            {
+                url: '/Dashboard/Menus/Users',
+                name: 'Users Manager',
+                icon: '/assets/users.svg'
+
+            },
            
         ]
     },

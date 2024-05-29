@@ -80,7 +80,7 @@ export default function ItemEdit({
         },
 
         {
-            name: i18n.t('custom price') + repo.message.name,
+            name: i18n.t('custom price') + repo.message.title,
         }
     ]
 
@@ -127,10 +127,26 @@ export default function ItemEdit({
                                         className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
                                 </Grid>
                                 <Grid xs={12} md={6} p={1}>
-                                    <Typography m={1}>{i18n.t('Price')} </Typography>
+                                    <Typography m={1}>کاربران معمولی</Typography>
                                     <TextField dir='ltr'
                                         type="number"
                                         onChange={(e) => setPrice({ ...Price, price: e.target.value })}
+
+                                        className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                </Grid>
+                                <Grid xs={12} md={6} p={1}>
+                                    <Typography m={1}>نمایندگی ها </Typography>
+                                    <TextField dir='ltr'
+                                        type="number"
+                                        onChange={(e) => setPrice({ ...Price, price2: e.target.value })}
+
+                                        className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                </Grid>
+                                <Grid xs={12} md={6} p={1}>
+                                    <Typography m={1}>فروشنده</Typography>
+                                    <TextField dir='ltr'
+                                        type="number"
+                                        onChange={(e) => setPrice({ ...Price, price3: e.target.value })}
 
                                         className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
                                 </Grid>

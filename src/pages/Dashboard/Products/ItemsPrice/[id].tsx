@@ -70,8 +70,8 @@ export default function ItemEdit({
             url: '/Dashboard/Products/Items'
         },
         {
-            name: data.name,
-            url: `/Dashboard/Products/Items/${data._id}`
+            name: 'بازگشت',
+            url: `/Dashboard/Products/GroupPrice/${repo.message.parent}`
         },
         {
             name: i18n.t('custom price') + repo.message.title,
@@ -141,8 +141,25 @@ export default function ItemEdit({
         }
 
     }
-    const ArrowTop = () => {
+    const Delete = async (item: any) => {
+        try {
+            let res: any = await axios({
+                method: 'delete',
+                url: config.url + '/v1/dashboard/price/' + item,
+                data: data,
+                headers: {
+                    Authorization: 'Bearer ' + cookie['token'],
+                }
+            });
 
+            let mydata = res.data;
+            reload();
+            return mydata;
+        } catch (error: any) {
+            let x = key + 1;
+            //  setKey(x);
+            //  setError(error.response);
+        }
     }
     useEffect(() => {
         reload();
@@ -199,13 +216,15 @@ export default function ItemEdit({
 
                                             </TableCell>
                                             <TableCell align="right" >
-                                                <DeleteForever></DeleteForever>
+                                                <Button onClick={(e) => { Delete(row._id) }}>
+                                                    <DeleteForever></DeleteForever>
+                                                </Button>
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button onClick={(e) => { Arrowup(row._id) }}>
                                                     <ArrowUpward></ArrowUpward>
                                                 </Button>
-                                                <Button  onClick={(e) => { ArrowDown(row._id) }} >
+                                                <Button onClick={(e) => { ArrowDown(row._id) }} >
                                                     <ArrowDownward></ArrowDownward>
                                                 </Button>
                                             </TableCell>

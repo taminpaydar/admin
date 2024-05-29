@@ -22,6 +22,11 @@
         "Pricing":"قیمت گذاری",
         "Market Setting":"تنظیمات فروشگاه",
         "Group":"گروه",
+        "group":"گروه",
+        "child":"زیر مجموعه",
+        "edit":"ویرایش",
+        "New Product Group":"گروه محصول جدید",
+        "delete":"پاک کردن",
         "specifications":"مشخصات فنی",
         "Features":"ویژگی ها",
         "Available":"موجود",
@@ -154,12 +159,19 @@
         "nationalcode":"کد ملی",
         "birthdate":"تاریخ تولد",
         "Insurance":"بیمه",
+        "Menu Manager":"مدیریت منو ها",
         "otherInsurance":"سایر بیمه",
         "gender":"جنسیت",
+        "Users Manager":"مدیریت کاربران",
         "Orders":"سفارشات",
         "Companies":"لیست کمپانی ها",
         "Discount Code":"کد تخفیف",
-        "Discounts":"تخفیفات "
-
+        "others":"سایر",
+        "Discounts":"تخفیفات ",
+        "Others":"سایر",
+        "User Manager":"مدیریت کاربران",
+        "User Detail":"جزییات کاربر",
+        "It includes a subset. can not be deleted":"این گروه شامل زیر مجموعه می باشدو پاک نمی شود",
+        "It includes a products. can not be deleted":"این گروه شامل محصولات می باشد و نمی توان این گروه را پاک نمود"
     }
 }

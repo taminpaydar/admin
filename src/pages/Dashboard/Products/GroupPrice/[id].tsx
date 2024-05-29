@@ -135,14 +135,24 @@ export default function ItemEdit({
             // Swal.fire(`${i18n.t('Saved Success')}`)
             // return mydata;
         } catch (error: any) {
-            // let x = key + 1;
-            // setKey(x);
-            // setError(error.response);
         }
 
     }
-    const ArrowTop = () => {
+    const Delete =async (id:any) => {
 
+        try {
+            let res: any = await axios({
+                method: 'delete',
+                url: config.url + '/v1/dashboard/groupprice/' + id,
+                headers: {
+                    Authorization: 'Bearer ' + cookie['token'],
+                }
+            });
+            reload();
+        } catch (error: any) {
+            Swal.fire('این مجموعه داری قیمت گذاری می باشد');
+
+        }
     }
     useEffect(() => {
         reload();
@@ -202,7 +212,10 @@ export default function ItemEdit({
 
                                             </TableCell>
                                             <TableCell align="right" >
+                                            <Button onClick={(e) => { Delete(row._id) }}>
+
                                                 <DeleteForever></DeleteForever>
+                                                </Button>
                                             </TableCell>
                                             <TableCell align="center">
                                                 <Button onClick={(e) => { Arrowup(row._id) }}>

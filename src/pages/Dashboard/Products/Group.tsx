@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import Swal from "sweetalert2";
 
 export default function ArticleGroup() {
     const [error, setError] = useState<any>(null);
@@ -73,23 +74,41 @@ export default function ArticleGroup() {
         })
     }
     const deleteItem = async (id: String) => {
+        Swal.fire({
+            title: "از کا خود مطمئن هستید؟",
+            text: "در صورت پاک کردن داده ها غیر قابل بازگشت است",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText:'خیر',
+            confirmButtonText: "بله"
+        }).then(async (result)  => {
+            if (result.isConfirmed) {
 
-        try {
-            let res: any = await axios({
-                method: 'delete',
-                url: `${config.url}/v1/dashboard/pgroup/${id}`,
-
-                headers: {
-                    Authorization: 'Bearer ' + cookie['token'],
+                try {
+                    let res: any = await axios({
+                        method: 'delete',
+                        url: `${config.url}/v1/dashboard/pgroup/${id}`,
+        
+                        headers: {
+                            Authorization: 'Bearer ' + cookie['token'],
+                        }
+                    });
+        
+                    LoadArticle('1', '');
+                    return true;
+                } catch (error: any) {
+                    var x = i18n.t(error.response.data.message) ;
+                    Swal.fire({
+                        text:x
+                    });
+                   // alert(error.response.data.message);
+                    //setError(error.response);
                 }
-            });
-
-            LoadArticle('1', '');
-            return true;
-        } catch (error: any) {
-            alert(error.response.data.message);
-            //setError(error.response);
-        }
+            }
+        });
+       
 
     }
     const ChangePage = async (event: React.ChangeEvent<unknown>, value: number) => {

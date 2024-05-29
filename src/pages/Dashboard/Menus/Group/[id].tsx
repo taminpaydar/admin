@@ -776,7 +776,7 @@ export function UrlComponent({ edit, setData, data }: any) {
                 defaultValue={edit == null ? data.url : edit.data.url}
                 fullWidth id="outlined-basic"
                 variant="outlined"
-                dir="rtl"
+                dir="ltr"
                 style={{ textAlign: 'left' }}
             />
         </Box>
