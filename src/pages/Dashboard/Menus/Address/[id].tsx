@@ -212,7 +212,7 @@ export default function EditGroup({ current }: any) {
                            </Box>
                         </Grid>
                         <Grid xs={12}>
-                            <Map latlng={center} changelocation={changelocation} />
+                            {/* <Map latlng={center} changelocation={changelocation} /> */}
                         </Grid>
                     </Grid>
                 }
