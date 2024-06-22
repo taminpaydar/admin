@@ -114,7 +114,7 @@ export default function ArticleGroup() {
             </Typography>
 
             <Grid container>
-                <Grid xs={12} md={8} pl={3}>
+                <Grid xs={12} md={6} pl={3}>
                     <FormControl fullWidth dir='lrt'>
                         <InputLabel id="demo-simple-select-label">{i18n.t('Search')} </InputLabel>
                         <TextField
@@ -134,7 +134,13 @@ export default function ArticleGroup() {
                             {i18n.t('New')}  <img className={styles.m1} height={20} src="/assets/plus.svg"></img>
                         </Button>
                     </Link>
-
+                </Grid>
+                <Grid xs={6} md={2} pr={1} pl={1} >
+                    <Link href={`/Dashboard/Products/Items/newfromdb`}>
+                        <Button className={styles.btnupload} style={{ height: 50 }} variant="contained" >
+                            {i18n.t('New DB')}  <img className={styles.m1} height={20} src="/assets/plus.svg"></img>
+                        </Button>
+                    </Link>
                 </Grid>
             </Grid>
             <Grid container mt={5}>
