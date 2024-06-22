@@ -301,16 +301,7 @@ export default function NewItem() {
                     
 
 
-                    {
-                        selectedItem != null && <Grid container>
-                            <Grid xs={12}>
-                                نام : {selectedItem.Name} انتخاب شد
-                                <Box m={3}>
-                                    <Button variant="contained" >ذخیره سازی</Button>
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    }
+                 
 
                     <Typography fontSize={'14px'} mt={4} mb={3} fontWeight={'bold'}>
                         {i18n.t('Select group')}
