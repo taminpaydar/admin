@@ -218,8 +218,8 @@ export default function ItemEdit({
                                                     onChange={(e) => setData({ ...data, precentprice: e.target.value })}
 
                                                     dir='ltr' className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
-                                                              <Typography color={'gray'} m={1}>{i18n.t('قیمت نمایندگی')} </Typography>
-                                                        <TextField
+                                                <Typography color={'gray'} m={1}>{i18n.t('قیمت نمایندگی')} </Typography>
+                                                <TextField
                                                     defaultValue={data.price2}
                                                     onChange={(e) => setData({ ...data, price2: e.target.value })}
 
@@ -332,6 +332,30 @@ export default function ItemEdit({
                                                     <MenuItem value='false'>خیر</MenuItem>
 
                                                 </Select>
+                                                <Typography color={'gray'} m={1}>{i18n.t('بیشترین فروش')} </Typography>
+
+                                                <Select
+                                                    defaultValue={data.AdvanceSales}
+                                                    fullWidth
+                                                    onChange={(e) => setData({ ...data, AdvanceSales: e.target.value })}
+
+                                                    variant="outlined">
+                                                    <MenuItem value='true' >بلی</MenuItem>
+                                                    <MenuItem value='false'>خیر</MenuItem>
+
+                                                </Select>
+                                                <Typography color={'gray'} m={1}>{i18n.t('تخفیف دار')} </Typography>
+
+                                                <Select
+                                                    defaultValue={data.OffProducts}
+                                                    fullWidth
+                                                    onChange={(e) => setData({ ...data, OffProducts: e.target.value })}
+
+                                                    variant="outlined">
+                                                    <MenuItem value='true' >بلی</MenuItem>
+                                                    <MenuItem value='false'>خیر</MenuItem>
+
+                                                </Select>
                                             </Grid>
 
 
@@ -352,12 +376,12 @@ export default function ItemEdit({
                                             insermode={false}
                                             edittable={true}
                                         ></FileManagerMultiFile>
-                                      
+
 
                                         <Box mt={10} pt={2}>
-                                        <hr ></hr>
+                                            <hr ></hr>
                                             <Typography > کاتالوگ و فایل</Typography>
-                                         
+
                                             <ALLFileManagerMultiFile
                                                 parent={data.id}
                                                 component="katalogproducts"
