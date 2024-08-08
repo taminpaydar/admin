@@ -253,314 +253,100 @@ export default function GroupPrdocuctEdit({
               </Grid>
             </Grid>
             <Grid xs={12} md={4} p={2}>
+              <Typography textAlign={'center'}>عکس اصلی</Typography>
 
               <FileManagerSingle
                 parent={data.id}
                 component="bloggroup"
                 insermode={false}
               ></FileManagerSingle>
+
             </Grid>
 
           </Grid>
 
         </Box>
-        <Grid container >
+        <Grid container  >
+          <Grid xs={12} sm={9} p={3}>
+            <Box dir='' mt={3}>
+              <Autocomplete
+                multiple
+                id="tags-filled"
+                options={[]}
+                defaultValue={data.specifications}
+                freeSolo
+                onChange={(event, newValue) => {
+                  setData({ ...data, specifications: newValue })
+                }}
+                renderInput={(params) => (
+                  <TextField
 
+                    {...params}
+                    variant="filled"
+                    label={i18n.t('Attribuite')}
+                    placeholder=''
+                  />
+                )}
+              />
+            </Box>
+            <Box dir='' mt={3}>
+              <Autocomplete
+                multiple
+                id="tags-filled2"
+                options={[]}
+                defaultValue={data.Technical}
+                freeSolo
+                onChange={(event, newValue) => {
+                  setData({ ...data, Technical: newValue })
+                }}
+                renderInput={(params) => (
+                  <TextField
+
+                    {...params}
+                    variant="filled"
+                    label={i18n.t('Technical')}
+                    placeholder=''
+                  />
+                )}
+              />
+            </Box>
+            <Box dir='' mt={3}>
+              <Autocomplete
+                multiple
+                id="tags-filled2"
+                options={[]}
+                defaultValue={data.Features}
+                freeSolo
+                onChange={(event, newValue) => {
+                  setData({ ...data, Features: newValue })
+                }}
+                renderInput={(params) => (
+                  <TextField
+
+                    {...params}
+
+                    variant="filled"
+                    label={i18n.t('Features')}
+                    placeholder=''
+                  />
+                )}
+              />
+            </Box>
+          </Grid>
+          <Grid xs={12} sm={3} p={3}>
+            <Typography textAlign={'center'}>آیکن</Typography>
+            <FileManagerSingle
+              parent={data.id}
+              component="bloggroupicon"
+              insermode={false}
+            ></FileManagerSingle>
+          </Grid>
 
         </Grid>
 
-        <hr />
-
-        <Box dir='' mt={3}>
-          <Autocomplete
-            multiple
-            id="tags-filled"
-            options={[]}
-            defaultValue={data.specifications}
-            freeSolo
-            onChange={(event, newValue) => {
-              setData({ ...data, specifications: newValue })
-            }}
-            renderInput={(params) => (
-              <TextField
-
-                {...params}
-                variant="filled"
-                label={i18n.t('Attribuite')}
-                placeholder=''
-              />
-            )}
-          />
-        </Box>
-        <Box dir='' mt={3}>
-          <Autocomplete
-            multiple
-            id="tags-filled2"
-            options={[]}
-            defaultValue={data.Technical}
-            freeSolo
-            onChange={(event, newValue) => {
-              setData({ ...data, Technical: newValue })
-            }}
-            renderInput={(params) => (
-              <TextField
-
-                {...params}
-                variant="filled"
-                label={i18n.t('Technical')}
-                placeholder=''
-              />
-            )}
-          />
-        </Box>
-        <Grid md={12} >
-        </Grid>
-        <Box dir='' mt={3}>
-          <Autocomplete
-            multiple
-            id="tags-filled2"
-            options={[]}
-            defaultValue={data.Features}
-            freeSolo
-            onChange={(event, newValue) => {
-              setData({ ...data, Features: newValue })
-            }}
-            renderInput={(params) => (
-              <TextField
-
-                {...params}
-
-                variant="filled"
-                label={i18n.t('Features')}
-                placeholder=''
-              />
-            )}
-          />
-        </Box>
-        <Box m={4}>
-          <Paper>
-            <Box mb={3} p={3} textAlign={'center'} >
-              <Typography onClick={(e) => { console.log('fuck') }}>{i18n.t('Add Detail')}</Typography>
-              <Box>
-                <form>
-                  <Grid container>
-                    <Grid xs={12}>
-                      <Typography component={'label'}></Typography>
-                      <TextField
-                        fullWidth
-                        defaultValue={data.description}
-                        onChange={(e) => setPrice({ ...attrprice, name: e.target.value })}
-                        className={styles.myformtextfield}
-                        label={i18n.t('name')}
-                        id="outlined-basic"
-                        variant="outlined"
-                      />
-
-                    </Grid>
-                  </Grid>
-                  <Grid >
-                    <Box width={'100%'} textAlign={'center'}>
-                      <Grid container key={key2}>
-                        <Grid xs={5} p={2}>
-                          <Typography component={'label'}></Typography>
-                          <TextField
-                            fullWidth
-                            defaultValue={subpriceattr.name}
-                            onChange={(e) => setPrPrice({ ...subpriceattr, name: e.target.value })}
-                            className={styles.myformtextfield}
-                            label={i18n.t('name')}
-                            id="outlined-basic"
-                            variant="outlined"
-                          />
-                        </Grid>
-                        <Grid xs={5} p={2} >
-                          <Typography component={'label'}></Typography>
-                          <TextField
-
-                            fullWidth
-                            defaultValue={subpriceattr.unit}
-                            onChange={(e) => setPrPrice({ ...subpriceattr, unit: e.target.value })}
-                            className={styles.myformtextfield}
-                            label={i18n.t('unit')}
-                            id="outlined-basic"
-                            variant="outlined"
-                          />
-                        </Grid>
-                        <Grid xs={1} p={2} >
-                          <Typography component={'label'}></Typography>
-                          <TextField
-                            type="color"
-                            fullWidth
-                            defaultValue={subpriceattr.color}
-                            onChange={(e) => setPrPrice({ ...subpriceattr, color: e.target.value })}
-                            className={styles.myformtextfield}
-                            label={i18n.t('unit')}
-                            id="outlined-basic"
-                            variant="outlined"
-                          />
-                        </Grid>
-                        <Grid xs={1} p={2} pt={3} >
-                          {editSubAttr == null ?
-                            <Button onClick={(e) => NewAttr()} variant="contained"  >{i18n.t('add')}</Button>
-                            :
-                            <Button onClick={(e) => SaveEditAttr(editSubAttr)} variant="contained"  >{i18n.t('edit')}</Button>
-
-                          }
-                        </Grid>
-                      </Grid>
-
-                    </Box>
-                    <Grid container key={key2}>
-                      <TableContainer component={Paper} dir={'rtl'}>
-                        <Table sx={{ minWidth: 650 }} aria-label="a dense table">
-                          <TableHead>
-                            <TableRow>
-                              <TableCell align="right">{i18n.t('name')}</TableCell>
-                              <TableCell align="right">{i18n.t('unit')}</TableCell>
-                              <TableCell align="right">{i18n.t('color')}</TableCell>
-
-                              <TableCell align="right">{i18n.t('edit')}</TableCell>
-                              <TableCell align="right">{i18n.t('delete')}</TableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {
-                              attrprice.detail.length != 0 &&
-                              attrprice.detail.map((row: any, index: any) => (
-                                <TableRow
-
-                                  key={row.name}
-                                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                >
-                                  <TableCell align="right" component="th" scope="row">
-                                    {row.name}
-                                  </TableCell>
-                                  <TableCell align="right">
-                                    {row.unit}
-
-                                  </TableCell>
-                                  <TableCell align="center">
-                                    <Box width={20} height={20} bgcolor={row.color}></Box>
-
-                                  </TableCell>
-                                  <TableCell align="right" >
-                                    <Box onClick={(e) => { EditAttr(index) }}>
-                                      <img className={styles.m1} src="/assets/insert.svg"></img>
-                                    </Box>
-                                  </TableCell>
-                                  <TableCell align="right">
-                                    <Box onClick={(e) => { DeleteAttr(index) }}>
-                                      <img className={styles.m1} src="/assets/trash.svg" width={20}></img>
-
-                                    </Box>
-                                  </TableCell>
-                                </TableRow>
-                              ))}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </Grid>
-                    <Grid>
-                      <Box textAlign={'center'} mt={1}>
-                        <Button onClick={(e) => { addtodetial() }} variant="contained" >Add Detial</Button>
-
-                      </Box>
-                    </Grid>
-
-                  </Grid>
-                </form>
-              </Box>
-
-            </Box>
-          </Paper>
-          <Paper>
-            <Box mt={3}>
-              {/* <pre>{JSON.stringify(attrprice, null, 2)}</pre>
-
-              <pre>{JSON.stringify(data.otherprice, null, 2)}</pre>
-
-              <Grid container key={key2}>
-                <TableContainer component={Paper} dir={'rtl'}>
-                  <Table sx={{ minWidth: 650 }} aria-label="a dense table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell align="right">{i18n.t('name')}</TableCell>
-
-                        <TableCell align="right">{i18n.t('edit')}</TableCell>
-                        <TableCell align="right">{i18n.t('delete')}</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
 
 
-                      <TableRow
 
-
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      >
-                        <TableCell align="right" component="th" scope="row">
-
-                        </TableCell>
-
-                        <TableCell align="right" >
-                          <Box >
-                            <img className={styles.m1} src="/assets/insert.svg"></img>
-                          </Box>
-                        </TableCell>
-                        <TableCell align="right">
-                          <Box >
-                            <img className={styles.m1} src="/assets/trash.svg" width={20}></img>
-
-                          </Box>
-                        </TableCell>
-                      </TableRow>
-
-                    </TableBody>
-                    <TableBody>
-
-
-                      <TableRow
-
-
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      >
-                        <TableCell align="right" component="th" scope="row">
-
-                        </TableCell>
-
-                        <TableCell align="right" >
-                          <Box >
-                            <img className={styles.m1} src="/assets/insert.svg"></img>
-                          </Box>
-                        </TableCell>
-                        <TableCell align="right">
-                          <Box >
-                            <img className={styles.m1} src="/assets/trash.svg" width={20}></img>
-
-                          </Box>
-                        </TableCell>
-                      </TableRow>
-                      <TableRow
-
-
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      >
-                        <TableCell align="right" colSpan={3} component="th" scope="row">
-                          <Box width={'100%'} textAlign={'center'}>
-                            <Button>{i18n.t('Add Price Attribute')}</Button>
-                          </Box>
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Grid> */}
-            </Box>
-          </Paper>
-        </Box>
-        <Box>
-
-        </Box>
         <AdvancedEditor parent={repo.message.id}></AdvancedEditor>
       </Container>
       {error != null && <ErrorDB key={key} err={error} />}
