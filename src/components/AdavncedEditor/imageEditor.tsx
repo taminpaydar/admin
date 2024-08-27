@@ -64,7 +64,7 @@ export default function ImageEditor({ data }: any){
                 <TextField
                   onChange={(e) => setData({ ...mydata, caption: e.target.value })}
 
-                defaultValue={mydata.caption} fullWidth label={t('caption')} ></TextField>
+                defaultValue={mydata.caption} fullWidth label={t('link')} ></TextField>
                 </Grid>
                 <Grid xs={12}  p={2} md={6}>
                     <Button onClick={(e)=>saveItem()} className={styles.buttonoutline}>{t('Save')}</Button>

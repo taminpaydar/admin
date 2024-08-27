@@ -1,6 +1,6 @@
 import Layout from "@/layouts/dashboardLayout"
 import { BreadcrumbCom } from "@/components/BreadCrumpCom";
-import { Container, InputLabel, MenuItem, Paper, Autocomplete, Select, Checkbox, TextField, Switch, Button, FormControl, Box, Typography, Grid } from "@mui/material";
+import { Container, InputLabel, MenuItem, Paper, Autocomplete, Select, Checkbox, TextField, Switch, Button, FormControl, Box, Typography, Grid, ListItem, ListItemText, List } from "@mui/material";
 import React, { useState, useEffect } from 'react';
 
 import axios from "axios"
@@ -43,12 +43,16 @@ export default function ItemEdit({
     const [vehiclelist, setVehiclelist] = useState<any>(null);
 
     let cookie = getCookies();
-    const [groups, setAllGroups] = useState<any>(null);
     const [error, setError] = useState<any>(null);
     const [specifications, setspecifications] = useState<any>(repo.message.specifications);
     const [Technical, setTechnical] = useState<any>(repo.message.Technical);
     const [Features, setFeatures] = useState<any>(repo.message.Features);
 
+    const [groups, setAllGroups] = useState<any>(null);
+    const [level1, setLevel1] = useState<any>(null);
+    const [level2, setLevel2] = useState<any>(null);
+    const [level3, setLevel3] = useState<any>(null);
+    const [level4, setLevel4] = useState<any>(null);
 
     const [key, setKey] = useState<any>(0);
     const [data, setData] = useState<any>(repo.message);
@@ -63,7 +67,42 @@ export default function ItemEdit({
     };
 
 
+    const level1select = (key: any) => {
+        setselectgroup(key.id);
+        if (key.ChildGroup != null) {
+            setLevel1(key);
+            setLevel2(null);
+            setLevel3(null);
+            setLevel4(null);
 
+        }
+
+    }
+    const level2select = (key: any) => {
+        setselectgroup(key.id);
+        if (key.ChildGroup != null) {
+            setLevel2(key);
+            setLevel3(null);
+            setLevel4(null);
+
+        }
+
+    }
+    const level4select = (key: any) => {
+        setselectgroup(key.id);
+        setLevel4(key);
+
+
+    }
+    const level3select = (key: any) => {
+        setselectgroup(key.id);
+        if (key.ChildGroup != null) {
+            setLevel3(key);
+            //   setLevel4(null);
+
+        }
+
+    }
 
     const loadallgroup = () => {
         axios.get(`${config.url}/v1/dashboard/pgroup/allgroup`, {
@@ -106,7 +145,19 @@ export default function ItemEdit({
             name: repo.message.name,
         }
     ]
-
+    const stylemy = {
+        width: '100%',
+        maxWidth: 360,
+        bgcolor: 'background.paper',
+        position: 'relative',
+        minHeight: 188,
+        border: 'dashed 1px  #333',
+        borderRadius: '15px',
+        textAlign: 'right',
+        overflow: 'auto',
+        maxHeight: 188,
+        '& ul': { padding: 0 },
+    }
     const saveitem = async () => {
         // data.parent = keyselectgroup == null ? '' : keyselectgroup;
         data.specifications = specifications;
@@ -134,6 +185,33 @@ export default function ItemEdit({
         }
 
     }
+    const changegroup= async()=>{
+        if(keyselectgroup==null){
+            Swal.fire(`${i18n.t('گروه جدید انتخاب شود')}`)
+
+            return false;
+        }
+        try {
+            let res: any = await axios({
+                method: 'put',
+                url: config.url + '/v1/dashboard/product/updategroup/' + data.id,
+                data: {
+                    parent:keyselectgroup
+                },
+                headers: {
+                    Authorization: 'Bearer ' + cookie['token'],
+                }
+            });
+
+           
+            Swal.fire(`${i18n.t('تغییر در گروه')}`)
+            return true;
+        } catch (error: any) {
+            Swal.fire(`${i18n.t('خطا در تغییر گروه')}`)
+
+        }
+
+    }
     const loadcomapny = async () => {
         let res: any = await axios({
             method: 'get',
@@ -154,8 +232,10 @@ export default function ItemEdit({
         });
         setVehiclelist(res2.data.message);
     }
+ 
     useEffect(() => {
         loadcomapny();
+        loadallgroup()
     }, []);
     return (
         <Layout>
@@ -182,6 +262,7 @@ export default function ItemEdit({
                                     <Tab label="توضیحات" value="3" />
                                     <Tab label="سئو" value="4" />
                                     <Tab label="مشخصات " value="5" />
+                                    <Tab label="تغییر گروه " value="6" />
 
                                 </TabList>
                             </Box>
@@ -583,6 +664,89 @@ export default function ItemEdit({
                                 </Grid>
 
                             </TabPanel>
+                            <TabPanel value="6">
+                            <Box  p={1} textAlign={'right'}>
+                                        <Typography  >{i18n.t('تغییر گروه')} </Typography>
+
+                                    </Box>
+                                    <div>
+                                    {groups != null &&
+                            <Grid container dir={'rtl'}>
+                                <Grid xs={12} md={3} p={1}>
+                                    <List
+                                        sx={stylemy}
+                                        subheader={<li />}
+                                    >
+                                        {groups.map((item: any) => (
+                                            item.subgroup == null &&
+                                            <ListItem
+                                                onClick={(e) => { level1select(item) }}
+                                                style={{ backgroundColor: level1 != null ? level1.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                <ListItemText primary={`${item.name}`} />
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                </Grid>
+                                {
+                                    level1 != null &&
+                                    <Grid xs={12} md={3} p={1}>
+                                        <List
+                                            sx={stylemy}
+                                            subheader={<li />}
+                                        >
+                                            {level1.ChildGroup.map((item: any) => (
+                                                <ListItem
+                                                    onClick={(e) => { level2select(item) }}
+                                                    style={{ backgroundColor: level2 != null ? level2.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                    <ListItemText primary={`${item.name}`} />
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Grid>
+                                }
+                                {
+                                    level2 != null &&
+                                    <Grid xs={12} md={3} p={1}>
+                                        <List
+                                            sx={stylemy}
+                                            subheader={<li />}
+                                        >
+                                            {level2.ChildGroup.map((item: any) => (
+                                                <ListItem
+                                                    onClick={(e) => { level3select(item) }}
+                                                    style={{ backgroundColor: level3 != null ? level3.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                    <ListItemText primary={`${item.name}`} />
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Grid>
+                                }
+                                {
+                                    level3 != null &&
+                                    <Grid xs={12} md={3} p={1}>
+                                        <List
+                                            sx={stylemy}
+                                            subheader={<li />}
+                                        >
+                                            {level3.ChildGroup.map((item: any) => (
+                                                <ListItem
+                                                    onClick={(e) => { level4select(item) }}
+                                                    style={{ backgroundColor: level4 != null ? level4.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                    <ListItemText primary={`${item.name}`} />
+                                                </ListItem>
+                                            ))}
+                                        </List>
+                                    </Grid>
+                                }
+
+                            </Grid>
+                        }
+                                    </div>
+                                        <div>
+                                            <Button  variant={'contained'} onClick={(e) => { changegroup() }}>تغییر گروه</Button>
+                                        </div>
+                                </TabPanel>
+
 
                         </TabContext>
 
