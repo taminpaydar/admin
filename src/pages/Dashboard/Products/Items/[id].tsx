@@ -185,8 +185,8 @@ export default function ItemEdit({
         }
 
     }
-    const changegroup= async()=>{
-        if(keyselectgroup==null){
+    const changegroup = async () => {
+        if (keyselectgroup == null) {
             Swal.fire(`${i18n.t('گروه جدید انتخاب شود')}`)
 
             return false;
@@ -196,14 +196,14 @@ export default function ItemEdit({
                 method: 'put',
                 url: config.url + '/v1/dashboard/product/updategroup/' + data.id,
                 data: {
-                    parent:keyselectgroup
+                    parent: keyselectgroup
                 },
                 headers: {
                     Authorization: 'Bearer ' + cookie['token'],
                 }
             });
 
-           
+
             Swal.fire(`${i18n.t('تغییر در گروه')}`)
             return true;
         } catch (error: any) {
@@ -232,7 +232,7 @@ export default function ItemEdit({
         });
         setVehiclelist(res2.data.message);
     }
- 
+
     useEffect(() => {
         loadcomapny();
         loadallgroup()
@@ -315,12 +315,31 @@ export default function ItemEdit({
                                                 <Box textAlign={'center'} pt={3} >
                                                     <Button variant={'contained'} href={`/Dashboard/Products/GroupPrice/${data._id}`}>سایر قیمت گذاری ها</Button>
                                                 </Box>
-                                                <Typography color={'gray'} m={1}>{i18n.t('technical code')} </Typography>
+                                                <Typography color={'gray'} m={1}>طول (سانتی متر)   </Typography>
 
+                                                <TextField
+                                                    type={'number'}
+                                                    defaultValue={data.length}
+                                                    onChange={(e) => setData({ ...data, length: e.target.value })}
+                                                    dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
+                                                <Typography color={'gray'} m={1}>عرض (سانتی متر)   </Typography>
+                                                <TextField
+                                                    type={'number'}
+                                                    defaultValue={data.width}
+                                                    onChange={(e) => setData({ ...data, width: e.target.value })}
+                                                    dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
+                                                     <Typography color={'gray'} m={1}>وزن (گرم)   </Typography>
+                                                <TextField
+                                                    type={'number'}
+                                                    defaultValue={data.weight}
+                                                    onChange={(e) => setData({ ...data, weight: e.target.value })}
+                                                    dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
+                                                <Typography color={'gray'} m={1}>{i18n.t('technical code')} </Typography>
                                                 <TextField
                                                     defaultValue={data.technicalcode}
                                                     onChange={(e) => setData({ ...data, technicalcode: e.target.value })}
                                                     dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
+
                                                 <Typography color={'gray'} m={1}>{i18n.t('brand')} </Typography>
                                                 {companies != null &&
                                                     <Autocomplete
@@ -665,87 +684,87 @@ export default function ItemEdit({
 
                             </TabPanel>
                             <TabPanel value="6">
-                            <Box  p={1} textAlign={'right'}>
-                                        <Typography  >{i18n.t('تغییر گروه')} </Typography>
+                                <Box p={1} textAlign={'right'}>
+                                    <Typography  >{i18n.t('تغییر گروه')} </Typography>
 
-                                    </Box>
-                                    <div>
+                                </Box>
+                                <div>
                                     {groups != null &&
-                            <Grid container dir={'rtl'}>
-                                <Grid xs={12} md={3} p={1}>
-                                    <List
-                                        sx={stylemy}
-                                        subheader={<li />}
-                                    >
-                                        {groups.map((item: any) => (
-                                            item.subgroup == null &&
-                                            <ListItem
-                                                onClick={(e) => { level1select(item) }}
-                                                style={{ backgroundColor: level1 != null ? level1.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
-                                                <ListItemText primary={`${item.name}`} />
-                                            </ListItem>
-                                        ))}
-                                    </List>
-                                </Grid>
-                                {
-                                    level1 != null &&
-                                    <Grid xs={12} md={3} p={1}>
-                                        <List
-                                            sx={stylemy}
-                                            subheader={<li />}
-                                        >
-                                            {level1.ChildGroup.map((item: any) => (
-                                                <ListItem
-                                                    onClick={(e) => { level2select(item) }}
-                                                    style={{ backgroundColor: level2 != null ? level2.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
-                                                    <ListItemText primary={`${item.name}`} />
-                                                </ListItem>
-                                            ))}
-                                        </List>
-                                    </Grid>
-                                }
-                                {
-                                    level2 != null &&
-                                    <Grid xs={12} md={3} p={1}>
-                                        <List
-                                            sx={stylemy}
-                                            subheader={<li />}
-                                        >
-                                            {level2.ChildGroup.map((item: any) => (
-                                                <ListItem
-                                                    onClick={(e) => { level3select(item) }}
-                                                    style={{ backgroundColor: level3 != null ? level3.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
-                                                    <ListItemText primary={`${item.name}`} />
-                                                </ListItem>
-                                            ))}
-                                        </List>
-                                    </Grid>
-                                }
-                                {
-                                    level3 != null &&
-                                    <Grid xs={12} md={3} p={1}>
-                                        <List
-                                            sx={stylemy}
-                                            subheader={<li />}
-                                        >
-                                            {level3.ChildGroup.map((item: any) => (
-                                                <ListItem
-                                                    onClick={(e) => { level4select(item) }}
-                                                    style={{ backgroundColor: level4 != null ? level4.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
-                                                    <ListItemText primary={`${item.name}`} />
-                                                </ListItem>
-                                            ))}
-                                        </List>
-                                    </Grid>
-                                }
+                                        <Grid container dir={'rtl'}>
+                                            <Grid xs={12} md={3} p={1}>
+                                                <List
+                                                    sx={stylemy}
+                                                    subheader={<li />}
+                                                >
+                                                    {groups.map((item: any) => (
+                                                        item.subgroup == null &&
+                                                        <ListItem
+                                                            onClick={(e) => { level1select(item) }}
+                                                            style={{ backgroundColor: level1 != null ? level1.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                            <ListItemText primary={`${item.name}`} />
+                                                        </ListItem>
+                                                    ))}
+                                                </List>
+                                            </Grid>
+                                            {
+                                                level1 != null &&
+                                                <Grid xs={12} md={3} p={1}>
+                                                    <List
+                                                        sx={stylemy}
+                                                        subheader={<li />}
+                                                    >
+                                                        {level1.ChildGroup.map((item: any) => (
+                                                            <ListItem
+                                                                onClick={(e) => { level2select(item) }}
+                                                                style={{ backgroundColor: level2 != null ? level2.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                                <ListItemText primary={`${item.name}`} />
+                                                            </ListItem>
+                                                        ))}
+                                                    </List>
+                                                </Grid>
+                                            }
+                                            {
+                                                level2 != null &&
+                                                <Grid xs={12} md={3} p={1}>
+                                                    <List
+                                                        sx={stylemy}
+                                                        subheader={<li />}
+                                                    >
+                                                        {level2.ChildGroup.map((item: any) => (
+                                                            <ListItem
+                                                                onClick={(e) => { level3select(item) }}
+                                                                style={{ backgroundColor: level3 != null ? level3.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                                <ListItemText primary={`${item.name}`} />
+                                                            </ListItem>
+                                                        ))}
+                                                    </List>
+                                                </Grid>
+                                            }
+                                            {
+                                                level3 != null &&
+                                                <Grid xs={12} md={3} p={1}>
+                                                    <List
+                                                        sx={stylemy}
+                                                        subheader={<li />}
+                                                    >
+                                                        {level3.ChildGroup.map((item: any) => (
+                                                            <ListItem
+                                                                onClick={(e) => { level4select(item) }}
+                                                                style={{ backgroundColor: level4 != null ? level4.id == item.id ? 'gray' : 'white' : 'white', cursor: 'pointer', textAlign: 'right' }} key={item.id}>
+                                                                <ListItemText primary={`${item.name}`} />
+                                                            </ListItem>
+                                                        ))}
+                                                    </List>
+                                                </Grid>
+                                            }
 
-                            </Grid>
-                        }
-                                    </div>
-                                        <div>
-                                            <Button  variant={'contained'} onClick={(e) => { changegroup() }}>تغییر گروه</Button>
-                                        </div>
-                                </TabPanel>
+                                        </Grid>
+                                    }
+                                </div>
+                                <div>
+                                    <Button variant={'contained'} onClick={(e) => { changegroup() }}>تغییر گروه</Button>
+                                </div>
+                            </TabPanel>
 
 
                         </TabContext>
