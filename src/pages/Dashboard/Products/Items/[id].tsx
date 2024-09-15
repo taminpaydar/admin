@@ -328,7 +328,6 @@ export default function ItemEdit({
                                                     defaultValue={data.width}
                                                     onChange={(e) => setData({ ...data, width: e.target.value })}
                                                     dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
-                                                     <Typography color={'gray'} m={1}>وزن (گرم)   </Typography>
                                                  <Typography color={'gray'} m={1}>ارتفاع (سانتی متر)   </Typography>
                                                 <TextField
                                                     type={'number'}
