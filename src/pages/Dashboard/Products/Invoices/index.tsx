@@ -57,7 +57,7 @@ export default function InvoiceList() {
             }
         }).then(function (res) {
             setPage(1);
-            
+
             loadallgroup();
         })
 
@@ -71,7 +71,7 @@ export default function InvoiceList() {
             name: 'Products',
             url: '/Dashboard/Products'
         },
-     
+
         {
             name: 'Invoices',
         }
@@ -88,7 +88,13 @@ export default function InvoiceList() {
         if (data == 3) { return 'در حال ارسال' };
         if (data == 4) { return 'بایگانی' };
         if (data == 5) { return 'کنسل شده ها' };
-
+        if (data == 6) { return 'منتظر تایید پرداخت' };
+        if (data == 7) { return 'در حال آماده سازی' };
+        if (data == 8) { return 'ارسال شده' };
+        if (data == 9) { return 'تحویل به مشتری' };
+        if (data == 10) { return 'عدم تحویل به مشتری' };
+        if (data == 11) { return 'کنسل شده' };
+        if (data == 12) { return 'برگشتی' };
         return data == false ? 'new' : 'read';
     }
     useEffect(() => {
@@ -104,7 +110,7 @@ export default function InvoiceList() {
                         <Box mt={4} mb={4}>
                             <Grid container spacing={4}>
 
-                                <Grid xs={12} sm={4} p={3}>
+                                <Grid xs={12} sm={2} p={3}>
                                     <label>نام </label>
 
                                     <TextField
@@ -112,7 +118,7 @@ export default function InvoiceList() {
 
                                         defaultValue={filter.name} fullWidth placeholder="نام"></TextField>
                                 </Grid>
-                                <Grid xs={12} sm={4} p={3}>
+                                <Grid xs={12} sm={2} p={3}>
                                     <label>نام خانوادگی</label>
 
                                     <TextField
@@ -121,7 +127,7 @@ export default function InvoiceList() {
 
                                         defaultValue={filter.family} fullWidth placeholder="نام خانوادگی"></TextField>
                                 </Grid>
-                                <Grid xs={12} sm={4} p={3}>
+                                <Grid xs={12} sm={2} p={3}>
                                     <label>موبایل</label>
 
                                     <TextField
@@ -129,7 +135,7 @@ export default function InvoiceList() {
 
                                         defaultValue={filter.mobile} fullWidth placeholder="موبایل"></TextField>
                                 </Grid>
-                                <Grid xs={12} sm={4} p={3} >
+                                <Grid xs={12} sm={2} p={3} >
                                     <label>شماره فاکتور</label>
 
                                     <TextField
@@ -199,14 +205,10 @@ export default function InvoiceList() {
                                                 <TableCell align="right" component="th" scope="row">
                                                     <Box className={` bg-gray `}>
                                                         {row.name}
-
-
                                                     </Box>
                                                 </TableCell>
                                                 <TableCell align="right">{row.lastname}</TableCell>
                                                 <TableCell align="right">{row.invoicenumber}</TableCell>
-
-
                                                 <TableCell align="right" dir="ltr">{convertodate(row.createdAt).toString()}</TableCell>
                                                 <TableCell align="right">
                                                     {statustotext(row.status)}</TableCell>

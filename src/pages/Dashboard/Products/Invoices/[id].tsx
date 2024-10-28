@@ -166,7 +166,6 @@ export default function InvoiceList({ current }: any) {
                                                         defaultValue={data.status}
                                                         fullWidth
                                                         onChange={(e) => setData({ ...data, status: e.target.value })}
-
                                                         placeholder="وضعیت"
                                                     >
                                                         <MenuItem value={1}>عدم پرداخت</MenuItem>
@@ -174,6 +173,14 @@ export default function InvoiceList({ current }: any) {
                                                         <MenuItem value={3}>در حال ارسال</MenuItem>
                                                         <MenuItem value={4}>بایگانی</MenuItem>
                                                         <MenuItem value={5}>کنسل شده ها</MenuItem>
+                                                        <MenuItem value={6}> منتظر تایید پرداخت</MenuItem>
+                                                        <MenuItem value={7}> در حال آماده سازی  </MenuItem>
+                                                        <MenuItem value={8}> ارسال شده</MenuItem>
+                                                        <MenuItem value={9}> تحویل به مشتری</MenuItem>
+                                                        <MenuItem value={10}> عدم تحویل به مشتری</MenuItem>
+                                                        <MenuItem value={11}> کنسل شده</MenuItem>
+                                                        <MenuItem value={12}> برگشتی</MenuItem>
+
                                                     </Select>
                                                     <Typography
 
