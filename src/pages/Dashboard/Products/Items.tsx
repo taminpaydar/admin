@@ -35,6 +35,7 @@ export default function ArticleGroup() {
 
     const [article, setArticle] = useState<any>(null);
     const [namefilter, setNameFilter] = useState<any>('');
+    const [codefilter, setCodeFilter] = useState<any>('');
 
     const [page, setPage] = useState<any>(1);
 
@@ -60,6 +61,19 @@ export default function ArticleGroup() {
     const LoadArticle = (current: any, parent: any) => {
         console.log(parent);
         axios.get(`${config.url}/v1/dashboard/product?&page=${current}&name=${namefilter}`, {
+            headers: {
+                Authorization: 'Bearer ' + cookie['token'],
+
+            }
+        }).then(function (res) {
+            console.log(res.data);
+            setArticle(res.data.message);
+            setParentnode(res.data.parent)
+        })
+    }
+    const LoadSearchCode = (current: any, parent: any) => {
+        console.log(parent);
+        axios.get(`${config.url}/v1/dashboard/product?&page=${current}&code=${namefilter}`, {
             headers: {
                 Authorization: 'Bearer ' + cookie['token'],
 
@@ -116,26 +130,38 @@ export default function ArticleGroup() {
             <Grid container>
                 <Grid xs={12} md={6} pl={3}>
                     <FormControl fullWidth dir='lrt'>
-                        <InputLabel id="demo-simple-select-label">{i18n.t('Search')} </InputLabel>
+                    {i18n.t('Search')} 
                         <TextField
                             onChange={(e) => { setNameFilter(e.target.value) }}
                         ></TextField>
                     </FormControl>
                 </Grid>
-
-                <Grid xs={6} md={2} pr={1} pl={1}>
-                    <Button onClick={(e) => { LoadArticle(1, parent) }} className={styles.btnupload} style={{ height: 50, backgroundColor: '#444' }} variant="contained" >
-                        <img className={styles.m1} src="/assets/successicon.svg"></img>      {i18n.t('Search')}
+                <Grid xs={12} md={6} pl={3}>
+                    <FormControl fullWidth dir='ltr'>
+                    {i18n.t('Code Search')} 
+                        <TextField
+                            onChange={(e) => { setCodeFilter(e.target.value) }}
+                        ></TextField>
+                    </FormControl>
+                </Grid>
+                <Grid xs={6} md={2} pr={1} pl={1} pt={4}>
+                    <Button onClick={(e) => { LoadSearchCode(1, parent) }} className={styles.btnupload} style={{ height: 50, backgroundColor: '#444' }} variant="contained" >
+                        <img className={styles.m1} src="/assets/successicon.svg"></img>      {i18n.t('جستجو کد')}
                     </Button>
                 </Grid>
-                <Grid xs={6} md={2} pr={1} pl={1} >
+                <Grid xs={6} md={2} pr={1} pl={1} pt={4}>
+                    <Button onClick={(e) => { LoadArticle(1, parent) }} className={styles.btnupload} style={{ height: 50, backgroundColor: '#444' }} variant="contained" >
+                        <img className={styles.m1} src="/assets/successicon.svg"></img>      {i18n.t('جستجو')}
+                    </Button>
+                </Grid>
+                <Grid xs={6} md={2} pr={1} pl={1} pt={4} >
                     <Link href={`/Dashboard/Products/Items/new`}>
                         <Button className={styles.btnupload} style={{ height: 50 }} variant="contained" >
                             {i18n.t('New')}  <img className={styles.m1} height={20} src="/assets/plus.svg"></img>
                         </Button>
                     </Link>
                 </Grid>
-                <Grid xs={6} md={2} pr={1} pl={1} >
+                <Grid xs={6} md={2} pr={1} pl={1} pt={4} >
                     <Link href={`/Dashboard/Products/Items/newfromdb`}>
                         <Button className={styles.btnupload} style={{ height: 50 }} variant="contained" >
                             {i18n.t('New DB')}  <img className={styles.m1} height={20} src="/assets/plus.svg"></img>
@@ -163,6 +189,8 @@ export default function ArticleGroup() {
                         <Table sx={{ minWidth: 650 }} aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
+                                <TableCell align="right">{i18n.t('code')}</TableCell>
+
                                     <TableCell align="right">{i18n.t('name')}</TableCell>
                                     <TableCell align="right">{i18n.t('group')}</TableCell>
 
@@ -177,6 +205,9 @@ export default function ArticleGroup() {
                                         key={row.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
+                                          <TableCell align="right" component="th" scope="row">
+                                            {row.technicalcode}
+                                        </TableCell>
                                         <TableCell align="right" component="th" scope="row">
                                             {row.name}
                                         </TableCell>
