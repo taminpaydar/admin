@@ -250,6 +250,7 @@ export default function ArticleGroup() {
                                     >
                                         <TableCell align="right" component="th" scope="row">
                                             {row.Code}
+                                            
                                         </TableCell>
                                         <TableCell align="right" component="th" scope="row">
                                             {row.name}
