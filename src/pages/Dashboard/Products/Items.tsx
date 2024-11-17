@@ -249,7 +249,7 @@ export default function ArticleGroup() {
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell align="right" component="th" scope="row">
-                                            {row.technicalcode}
+                                            {row.Code}
                                         </TableCell>
                                         <TableCell align="right" component="th" scope="row">
                                             {row.name}
