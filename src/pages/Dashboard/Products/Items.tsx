@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import i18n from 'i18n';
-import { Grid, FormControl, TextField } from '@mui/material'
+import { Grid, FormControl, TextField, Autocomplete } from '@mui/material'
 import { Container, InputLabel, MenuItem, Select, Button, Box } from "@mui/material";
 import { AddNewCard, EditCard } from "@/components/Dashboard/cardThumpnailGroup";
 import React, { useState, useEffect } from 'react';
@@ -32,10 +32,12 @@ export default function ArticleGroup() {
     const [error, setError] = useState<any>(null);
     const [parent, setParent] = useState<any>('');
     const [parentnode, setParentnode] = useState<any>('');
+    const [groups, setGroup] = useState<any>(null);
 
     const [article, setArticle] = useState<any>(null);
     const [namefilter, setNameFilter] = useState<any>('');
     const [codefilter, setCodeFilter] = useState<any>('');
+    const [filterGroup, setFilterGroup] = useState<any>(null);
 
     const [page, setPage] = useState<any>(1);
 
@@ -58,9 +60,9 @@ export default function ArticleGroup() {
         LoadArticle(1, id);
     }
 
-    const LoadArticle = (current: any, parent: any) => {
+    const LoadArticle = (current: any, parent: any,group:any=null) => {
         console.log(parent);
-        axios.get(`${config.url}/v1/dashboard/product?&page=${current}&name=${namefilter}`, {
+        axios.get(`${config.url}/v1/dashboard/product?&page=${current}&name=${namefilter}&filterGroup=${group}&code=${codefilter}`, {
             headers: {
                 Authorization: 'Bearer ' + cookie['token'],
 
@@ -71,6 +73,7 @@ export default function ArticleGroup() {
             setParentnode(res.data.parent)
         })
     }
+    
     const LoadSearchCode = (current: any, parent: any) => {
         console.log(parent);
         axios.get(`${config.url}/v1/dashboard/product?&page=${current}&code=${namefilter}`, {
@@ -84,6 +87,19 @@ export default function ArticleGroup() {
             setParentnode(res.data.parent)
         })
     }
+
+    const LoadGroup = () => {
+        axios.get(`${config.url}/v1/group/all`, {
+            headers: {
+                Authorization: 'Bearer ' + cookie['token'],
+
+            }
+        }).then(function (res) {
+            console.log(res.data);
+            setGroup(res.data.message);
+        })
+    }
+
     const deleteItem = (id: String) => {
         Swal.fire({
             title: "از کا خود مطمئن هستید؟",
@@ -92,7 +108,7 @@ export default function ArticleGroup() {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            cancelButtonText:'خیر',
+            cancelButtonText: 'خیر',
             confirmButtonText: "بله"
         }).then((result) => {
             if (result.isConfirmed) {
@@ -112,11 +128,12 @@ export default function ArticleGroup() {
     }
     const ChangePage = async (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-        LoadArticle(value, parent);
+        LoadArticle(value, parent,filterGroup);
 
     }
     useEffect(() => {
         LoadArticle('1', '');
+        LoadGroup();
     }, []);
     return <Layout>
         <Container>
@@ -128,29 +145,55 @@ export default function ArticleGroup() {
             </Typography>
 
             <Grid container>
-                <Grid xs={12} md={6} pl={3}>
+                <Grid xs={12} md={4} pl={3}>
                     <FormControl fullWidth dir='lrt'>
-                    {i18n.t('Search')} 
+                        {i18n.t('Search')}
                         <TextField
                             onChange={(e) => { setNameFilter(e.target.value) }}
                         ></TextField>
                     </FormControl>
                 </Grid>
-                <Grid xs={12} md={6} pl={3}>
+                <Grid xs={12} md={4} pl={3}>
                     <FormControl fullWidth dir='ltr'>
-                    {i18n.t('Code Search')} 
+                        {i18n.t('Code Search')}
                         <TextField
                             onChange={(e) => { setCodeFilter(e.target.value) }}
                         ></TextField>
                     </FormControl>
                 </Grid>
-                <Grid xs={6} md={2} pr={1} pl={1} pt={4}>
-                    <Button onClick={(e) => { LoadSearchCode(1, parent) }} className={styles.btnupload} style={{ height: 50, backgroundColor: '#444' }} variant="contained" >
-                        <img className={styles.m1} src="/assets/successicon.svg"></img>      {i18n.t('جستجو کد')}
-                    </Button>
+                <Grid xs={4} md={2} pr={1} pl={1} pt={4} dir="rtl">
+                    {
+                        groups != null && <Autocomplete
+                        options={groups} // Use the array as options
+                        sx={{ width: 300 }}
+                        getOptionLabel={(option: any) => option.name} // Map options to display their names
+                        onChange={(event, value) => {
+                                if(value==null){
+                                    setFilterGroup(null);
+                                    LoadArticle('1', '',null);
+                                }else{
+                                    setFilterGroup(value.id);
+                                    LoadArticle('1', '',value.id);
+
+                                }
+                            console.log(value); // `value` is the selected option
+                        }}
+                        renderInput={(params) => (
+                            <TextField {...params} label="گروه" variant="outlined" />
+                        )}
+                    />
+
+                    }
+
+
                 </Grid>
+
+
+            </Grid>
+            <Grid container mt={5}>
+               
                 <Grid xs={6} md={2} pr={1} pl={1} pt={4}>
-                    <Button onClick={(e) => { LoadArticle(1, parent) }} className={styles.btnupload} style={{ height: 50, backgroundColor: '#444' }} variant="contained" >
+                    <Button onClick={(e) => { LoadArticle(1, parent,filterGroup) }} className={styles.btnupload} style={{ height: 50, backgroundColor: '#444' }} variant="contained" >
                         <img className={styles.m1} src="/assets/successicon.svg"></img>      {i18n.t('جستجو')}
                     </Button>
                 </Grid>
@@ -189,7 +232,7 @@ export default function ArticleGroup() {
                         <Table sx={{ minWidth: 650 }} aria-label="a dense table">
                             <TableHead>
                                 <TableRow>
-                                <TableCell align="right">{i18n.t('code')}</TableCell>
+                                    <TableCell align="right">{i18n.t('code')}</TableCell>
 
                                     <TableCell align="right">{i18n.t('name')}</TableCell>
                                     <TableCell align="right">{i18n.t('group')}</TableCell>
@@ -205,13 +248,18 @@ export default function ArticleGroup() {
                                         key={row.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                          <TableCell align="right" component="th" scope="row">
+                                        <TableCell align="right" component="th" scope="row">
                                             {row.technicalcode}
                                         </TableCell>
                                         <TableCell align="right" component="th" scope="row">
                                             {row.name}
                                         </TableCell>
-                                        <TableCell align="right">{row.togroup.name}</TableCell>
+                                        <TableCell align="right">
+                                            <Box textAlign={'center'}>{row.togroup.name}</Box>
+                                            <Box textAlign={'center'} fontSize={12} >{row.togroup.ToSub!=null && row.togroup.ToSub.name}</Box>
+                                            <Box textAlign={'center'} fontSize={12} >{row.togroup.ToSub!=null && row.togroup.ToSub.ToSub!=null && row.togroup.ToSub.name }</Box>
+
+                                        </TableCell>
 
                                         <TableCell align="right">
                                             <Link href={`/Dashboard/Products/Items/${row.id}`}>
