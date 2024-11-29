@@ -25,6 +25,7 @@ import TabPanel from '@mui/lab/TabPanel';
 
 
 import { useRouter } from "next/router";
+import { dir } from "console";
 type Repo = any;
 
 
@@ -277,6 +278,15 @@ export default function ItemEdit({
 
 
                                             className={styles.myformtextfield} fullWidth id="outlined-basic" variant="outlined" />
+                                        <Container
+                                       
+                                           style={{
+                                            textAlign:'center',
+                                            fontWeight:'bold',
+                                            padding:'14px',backgroundColor:'red',color:'white',borderRadius:'15px',marginTop:'10px'}}
+                                        >
+                                            <Typography>کد: {data.Code}</Typography>
+                                        </Container>
 
                                         <Typography color={'gray'} m={1}>{i18n.t('URL')} </Typography>
                                         <TextField
@@ -328,13 +338,13 @@ export default function ItemEdit({
                                                     defaultValue={data.width}
                                                     onChange={(e) => setData({ ...data, width: e.target.value })}
                                                     dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
-                                                 <Typography color={'gray'} m={1}>ارتفاع (سانتی متر)   </Typography>
+                                                <Typography color={'gray'} m={1}>ارتفاع (سانتی متر)   </Typography>
                                                 <TextField
                                                     type={'number'}
                                                     defaultValue={data.height}
                                                     onChange={(e) => setData({ ...data, height: e.target.value })}
                                                     dir='rtl' className={styles.price} fullWidth id="outlined-basic" variant="outlined" />
-                                                     <Typography color={'gray'} m={1}>وزن (گرم)   </Typography>
+                                                <Typography color={'gray'} m={1}>وزن (گرم)   </Typography>
                                                 <TextField
                                                     type={'number'}
                                                     defaultValue={data.weight}
